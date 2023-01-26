@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Team-Return/JOBIS-DESIGN-SYSTEM.git"
+    "url": "https://github.com/Team-Return/JOBIS-DESIGN-SYSTEM.git"
   },
   "author": {
     "name": "jikwan",
@@ -71,7 +71,6 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "prettier": "^2.8.3",
-    "semantic-release": "^20.1.0",
     "storybook": "^6.5.15",
     "style-loader": "^3.3.1",
     "styled-components": "^5.3.6",
