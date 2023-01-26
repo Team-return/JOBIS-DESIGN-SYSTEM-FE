@@ -1,7 +1,7 @@
 {
-  "name": "JOBIS-DESIGN-SYSTEM",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "@team-return/design-system",
+  "version": "1.0.5",
+  "main": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/Team-Return/JOBIS-DESIGN-SYSTEM.git"
@@ -87,5 +87,8 @@
   },
   "readme": "ERROR: No README data found!",
   "homepage": "https://github.com/Team-Return/JOBIS-DESIGN-SYSTEM#readme",
-  "_id": "JOBIS-DESIGN-SYSTEM@1.0.0"
+  "_id": "JOBIS-DESIGN-SYSTEM@1.0.0",
+  "publishConfig": {
+    "access": "public"
+  }
 }
