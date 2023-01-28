@@ -1,0 +1,46 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs/';
+
+import { color } from '../../styles/theme/color';
+
+<Meta title="Color/Colors" />
+
+# Colors
+
+<ColorPalette>
+  <ColorItem
+    title="theme.color.liteBlue"
+    subtitle="LiteBlue"
+    colors={[color.liteBlue]}
+  />
+  <ColorItem title="theme.color.blue" subtitle="Blue" colors={[color.blue]} />
+  <ColorItem
+    title="theme.color.darkBlue"
+    subtitle="DarkBlue"
+    colors={[color.darkBlue]}
+  />
+  <ColorItem title="theme.color.red" subtitle="Red" colors={[color.red]} />
+  <ColorItem
+    title="theme.color.green"
+    subtitle="Green"
+    colors={[color.green]}
+  />
+  <ColorItem
+    title="theme.color.yellow"
+    subtitle="Yellow"
+    colors={[color.yellow]}
+  />
+  <ColorItem
+    title="Gray"
+    colors={[
+      color.gray10,
+      color.gray20,
+      color.gray30,
+      color.gray40,
+      color.gray50,
+      color.gray60,
+      color.gray70,
+      color.gray80,
+      color.gray90,
+    ]}
+  />
+</ColorPalette>

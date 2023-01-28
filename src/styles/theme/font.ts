@@ -19,4 +19,24 @@ export const font = {
   Caption: fontToCss(12, 400, 18),
 } as const;
 
+export const typography = {
+  weight: {
+    regular: '400',
+    medium: '500',
+    bold: '700',
+  },
+  size: {
+    s1: 12,
+    s2: 14,
+    s3: 16,
+    m1: 18,
+    m2: 20,
+    m3: 24,
+    l1: 28,
+    l2: 32,
+    l3: 36,
+    code: 40,
+  },
+} as const;
+
 export type fontKeyOfType = keyof typeof font;

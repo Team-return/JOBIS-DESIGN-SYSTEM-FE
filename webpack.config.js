@@ -28,11 +28,6 @@ module.exports = {
           name: '[name].[ext]',
         },
       },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/, //바벨 로더가 실행시키지 못하도록 제외
-        loader: 'babel-loader', // 바벨 로더를 추가한다
-      },
     ],
   },
   plugins: [new CleanWebpackPlugin()],

@@ -1,6 +1,6 @@
 {
   "name": "@team-return/design-system",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "src/index.ts",
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
     "@semantic-release/npm": "^9.0.2",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "@storybook/addon-actions": "^6.5.15",
+    "@storybook/addon-docs": "^6.5.16",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-interactions": "^6.5.15",
     "@storybook/addon-links": "^6.5.15",
@@ -46,6 +47,7 @@
     "@storybook/builder-webpack5": "^6.5.15",
     "@storybook/manager-webpack4": "^6.5.15",
     "@storybook/manager-webpack5": "^6.5.15",
+    "@storybook/mdx2-csf": "^0.0.4",
     "@storybook/react": "^6.5.15",
     "@storybook/testing-library": "^0.0.13",
     "@types/jest": "^29.2.6",
@@ -55,6 +57,7 @@
     "@types/styled-components": "^5.1.26",
     "babel-loader": "^9.1.2",
     "babel-plugin-named-asset-import": "^0.3.8",
+    "babel-preset-react-app": "^10.0.1",
     "chromatic": "^6.14.0",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.3",
