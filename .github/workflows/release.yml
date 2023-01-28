@@ -26,8 +26,8 @@ jobs:
         run: yarn build
 
       - name: Release
-        run: yarn publish
         env:
           CI: true
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn publish
