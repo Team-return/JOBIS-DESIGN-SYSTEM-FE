@@ -1,37 +1,48 @@
-import styled from 'styled-components';
-import { directionType } from 'types/direction';
+import { directionType } from '../types/direction';
 
-type scanType =
-  | string[]
-  | [string | 'auto']
-  | [string | directionType, string | 'auto']
-  | [string, string | 'auto', string]
-  | [string, string, string, string | 'auto'];
+/** 이거 배열말고 그냥 매개변수로 받아야 타이핑이 줄어들음 */
+type marginType =
+  | [number, number, number, number]
+  | [number | directionType, number | 'auto']
+  | [number];
 
-export const marginDirection = (
-  direction: [string | directionType, string | 'auto'] | string[]
-) => {
-  switch (direction[0]) {
+export interface marginCssType {
+  margin?: marginType[] | marginType;
+}
+
+const mgReturn = (mg: marginType) => {
+  if (mg[0] === 0 && mg[1] === 'auto') {
+    return `margin: 0 auto;`;
+  }
+
+  const unitTransform = (m: 'auto' | number) => (m === 'auto' ? m : m + 'px');
+
+  switch (mg[0]) {
     case 'top':
+    case 'bottom':
     case 'left':
     case 'right':
-    case 'bottom':
-      return `margin-${direction[0]}: ${direction[1]}`;
+      return `margin-${mg[0]}: ${unitTransform(mg[1] || 0)};`;
     default:
-      return `margin: ${direction}`;
+      let css = 'margin: ';
+      for (let j = 0; j < mg.length; j++) css += mg[j] + 'px ';
+      return css + ';';
   }
 };
 
-export const marginType = (type: string) => {
-  const scan: scanType = type.split(' ');
-  switch (scan.length) {
-    case 2:
-      return marginDirection(scan);
-    case 1:
-    case 3:
-    case 4:
-      return `margin: ${scan}`;
-    default:
-      return;
+export const marginToCss = ({ margin }: marginCssType) => {
+  if (!margin) return;
+  let mgCss = '';
+
+  if (Array.isArray(margin[0])) {
+    for (let i = 0; i < margin.length; i++) {
+      // @ts-expect-error
+      mgCss += mgReturn(margin[i]);
+    }
+  } else {
+    // @ts-expect-error
+    mgCss = mgReturn(margin);
   }
+
+  return mgCss;
 };
