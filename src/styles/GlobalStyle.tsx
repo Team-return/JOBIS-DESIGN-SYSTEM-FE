@@ -12,7 +12,6 @@ export const GlobalStyle = createGlobalStyle`
     font-style: normal;
     font-family: 'Noto Sans', sans-serif;
   }
-  button,
   label {
     cursor: pointer;
     background-color: transparent;
