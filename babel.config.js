@@ -12,6 +12,6 @@ module.exports = {
         corejs: 3,
       },
     ],
-    '@babel/typescript',
+    '@babel/preset-typescript',
   ],
 };
