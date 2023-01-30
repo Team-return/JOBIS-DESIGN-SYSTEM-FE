@@ -1,8 +1,6 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { marginCssType, marginToCss } from '../../utils/distance';
-import * as C from '../../styles/theme/color';
-import * as F from '../../styles/theme/font';
 
 interface CheckBoxProps extends marginCssType {
   //   label?: string;

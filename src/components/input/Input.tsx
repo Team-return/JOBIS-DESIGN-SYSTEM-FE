@@ -5,6 +5,7 @@ import * as C from '../../styles/theme/color';
 import * as F from '../../styles/theme/font';
 import { DefaultInput } from './Default';
 import { LineInput } from './Line';
+import { Icon, IconType } from '../icon/Icon';
 
 type kindType = 'LineInput' | 'DefaultInput';
 
@@ -17,7 +18,7 @@ export interface InputProps extends marginCssType {
   kind: kindType;
   disabled: boolean;
   value: string | number;
-  Icon?: JSX.Element;
+  iconName?: IconType;
   onClick?: () => void;
   message?: string;
   error: boolean;
@@ -32,7 +33,7 @@ export const Input = ({
   kind = 'DefaultInput',
   disabled = false,
   value = '',
-  Icon,
+  iconName,
   onClick,
   margin,
   message,
@@ -57,6 +58,7 @@ export const Input = ({
           error={error}
           onClick={onClick}
         />
+        <_Icon>{iconName && <Icon icon={iconName} />}</_Icon>
       </_Container>
       {!disabled && message && <_Message error={error}>{message}</_Message>}
     </_Wrapper>
@@ -91,7 +93,6 @@ const _Container = styled.div<{ width?: number }>`
 
 const _Icon = styled.div`
   position: absolute;
-  background-color: black;
   right: 15px;
   width: 24px;
   height: 24px;
@@ -105,7 +106,7 @@ export const _BaseInput = styled.input<InputProps>`
   padding: 0 10px 0 15px;
   color: ${({ disabled }) => (disabled ? C.gray50 : C.gray90)};
   &::placeholder {
-    color: ${C.gray60};
+    color: ${({ disabled }) => (disabled ? C.gray50 : C.gray60)};
   }
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'auto')};
   ${({ kind, error, disabled }) => {

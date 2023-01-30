@@ -17,6 +17,6 @@
     "baseUrl": "./src",
     "declaration": true
   },
-  "include": ["src", "svg.d.ts", "tsconfig.json"],
+  "include": ["src", "src/custom.d.ts", "tsconfig.json"],
   "exclude": ["build", "src/stories/*"]
 }

@@ -1,11 +1,12 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 import { marginCssType, marginToCss } from '../../utils/distance';
 import * as C from '../../styles/theme/color';
 import * as F from '../../styles/theme/font';
+import { Icon, IconType } from '../../components/icon/Icon';
 
 type kindType = 'Solid' | 'Ghost' | 'Light' | 'Gray';
 type sizeType = 'XS' | 'S' | 'M' | 'L';
+type iconDirectionType = 'Left' | 'Right';
 
 interface ButtonProps extends marginCssType {
   label?: string;
@@ -13,7 +14,8 @@ interface ButtonProps extends marginCssType {
   kind: kindType;
   size: sizeType;
   disabled: boolean;
-  Icon?: JSX.Element;
+  iconDirection?: iconDirectionType;
+  iconName?: IconType;
   onClick?: () => void;
 }
 
@@ -23,7 +25,8 @@ export const Button = ({
   kind = 'Solid',
   size = 'M',
   disabled = false,
-  Icon,
+  iconName,
+  iconDirection = 'Left',
   onClick,
   margin,
 }: ButtonProps) => {
@@ -36,7 +39,13 @@ export const Button = ({
       onClick={onClick}
       margin={margin}
     >
+      {iconDirection === 'Left' && iconName && (
+        <Icon size={16} icon={iconName} />
+      )}
       {label}
+      {iconDirection === 'Right' && iconName && (
+        <Icon size={16} icon={iconName} />
+      )}
     </_Wrapper>
   );
 };

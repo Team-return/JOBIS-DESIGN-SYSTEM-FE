@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Button } from '../../components/button/Button';
+import SearchIcon from '../../styles/icons/SearchIcon';
 
 export default {
   title: 'component/Button',
