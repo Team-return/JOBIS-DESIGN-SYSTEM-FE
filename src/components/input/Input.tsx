@@ -3,107 +3,119 @@ import styled, { css } from 'styled-components';
 import { marginCssType, marginToCss } from '../../utils/distance';
 import * as C from '../../styles/theme/color';
 import * as F from '../../styles/theme/font';
+import { DefaultInput } from './Default';
+import { LineInput } from './Line';
 
-type kindType = 'Solid' | 'Ghost' | 'Light' | 'Gray';
-type sizeType = 'XS' | 'S' | 'M' | 'L';
+type kindType = 'LineInput' | 'DefaultInput';
 
-interface ButtonProps extends marginCssType {
+export interface InputProps extends marginCssType {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
+  width?: number;
   className?: string;
+  placeHolder?: string;
   kind: kindType;
-  size: sizeType;
   disabled: boolean;
+  value: string | number;
   Icon?: JSX.Element;
   onClick?: () => void;
+  message?: string;
+  error: boolean;
 }
 
 export const Input = ({
-  label = '',
+  onChange,
+  label,
+  width = 450,
   className,
-  kind = 'Solid',
-  size = 'M',
+  placeHolder = 'Placeholder',
+  kind = 'DefaultInput',
   disabled = false,
+  value = '',
   Icon,
   onClick,
   margin,
-}: ButtonProps) => {
+  message,
+  error = false,
+}: InputProps) => {
   return (
-    <_Wrapper
-      className={className}
-      size={size}
-      kind={kind}
-      disabled={disabled}
-      onClick={onClick}
-      margin={margin}
-    >
-      {label}
+    <_Wrapper margin={margin}>
+      {label && (
+        <_FieldLabel error={error} disabled={disabled}>
+          {label}
+        </_FieldLabel>
+      )}
+      <_Container width={width}>
+        <_BaseInput
+          onChange={onChange}
+          className={className}
+          value={value}
+          disabled={disabled}
+          placeholder={placeHolder}
+          width={width}
+          kind={kind}
+          error={error}
+          onClick={onClick}
+        />
+      </_Container>
+      {!disabled && message && <_Message error={error}>{message}</_Message>}
     </_Wrapper>
   );
 };
 
-const _Wrapper = styled.button<ButtonProps>`
-  all: unset;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 45px;
-  padding: 0 15px;
-  gap: 5px;
-  ${F.font.Heading6};
-  min-width: ${({ size }) => {
-    switch (size) {
-      case 'L':
-        return '265px';
-      case 'M':
-        return '107px';
-      case 'S':
-        return '71px';
-      case 'XS':
-        return '56px';
-    }
-  }};
+const _Wrapper = styled.div<marginCssType>`
   ${({ margin }) => marginToCss({ margin })};
-  ${({ disabled, kind }) => cssGenerator(kind, disabled)};
 `;
 
-const cssGenerator = (kind: kindType, disabled: boolean) => {
-  switch (kind) {
-    case 'Solid':
-      return css`
-        color: ${C.gray10};
-        background-color: ${disabled ? C.gray50 : C.liteBlue};
-        cursor: ${disabled ? 'not-allowed' : 'pointer'};
-        &:hover {
-          background-color: ${!disabled && C.blue};
-        }
-      `;
-    case 'Ghost':
-      return css`
-        color: ${disabled ? C.gray50 : C.liteBlue};
-        background-color: ${C.gray10};
-        border: 1.5px solid ${disabled ? C.gray40 : C.liteBlue};
-        cursor: ${disabled ? 'not-allowed' : 'pointer'};
-        &:hover {
-          background-color: ${!disabled && C.gray40};
-        }
-      `;
-    case 'Light':
-      return css`
-        color: ${disabled ? C.gray50 : C.liteBlue};
-        background-color: ${C.gray30};
-        cursor: ${disabled ? 'not-allowed' : 'pointer'};
-        &:hover {
-          background-color: ${!disabled && C.gray40};
-        }
-      `;
-    case 'Gray':
-      return css`
-        color: ${disabled ? C.gray50 : C.gray80};
-        background-color: ${C.gray30};
-        cursor: ${disabled ? 'not-allowed' : 'pointer'};
-        &:hover {
-          background-color: ${!disabled && C.gray40};
-        }
-      `;
+const _FieldLabel = styled.div<{ error: boolean; disabled: boolean }>`
+  margin-bottom: 3px;
+  color: ${({ error, disabled }) =>
+    !disabled ? (error ? C.red : C.gray70) : C.gray50};
+  ${F.font.Body4};
+`;
+
+const _Message = styled.div<{ error: boolean }>`
+  margin-top: 5px;
+  ${F.font.Caption};
+  color: ${({ error }) => (error ? C.red : C.gray60)};
+  ${F.font.Body4};
+`;
+
+const _Container = styled.div<{ width?: number }>`
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: ${({ width }) => width + 'px'};
+  height: 45px;
+`;
+
+const _Icon = styled.div`
+  position: absolute;
+  background-color: black;
+  right: 15px;
+  width: 24px;
+  height: 24px;
+`;
+
+export const _BaseInput = styled.input<InputProps>`
+  position: absolute;
+  width: ${({ width }) => width + 'px'};
+  border: 0;
+  outline: 0;
+  padding: 0 10px 0 15px;
+  color: ${({ disabled }) => (disabled ? C.gray50 : C.gray90)};
+  &::placeholder {
+    color: ${C.gray60};
   }
-};
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'auto')};
+  ${({ kind, error, disabled }) => {
+    switch (kind) {
+      case 'DefaultInput':
+        return DefaultInput(error, disabled);
+      case 'LineInput':
+        return LineInput(error);
+      default:
+        return '';
+    }
+  }}
+`;
