@@ -3,9 +3,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'production',
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
-  },
   output: {
     filename: 'bundle.min.js',
     path: path.resolve(__dirname, 'dist'),
@@ -29,6 +26,9 @@ module.exports = {
         },
       },
     ],
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   plugins: [new CleanWebpackPlugin()],
 };
