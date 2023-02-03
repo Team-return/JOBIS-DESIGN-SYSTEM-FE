@@ -13,10 +13,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "outDir": "build",
-    "baseUrl": "./src",
+    "outDir": "./dist",
     "declaration": true
   },
-  "include": ["src", "src/custom.d.ts", "tsconfig.json"],
-  "exclude": ["build", "src/stories/*"]
+  "include": ["src", "src/custom.d.ts"],
+  "exclude": ["build", "src/stories/*", "node_modules", "build"]
 }
