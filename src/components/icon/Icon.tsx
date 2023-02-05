@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { icons } from '../../styles/icon';
+import { colorKeyOfType } from '../../styles/theme/color';
 
 const Svg = styled.svg`
   display: inline-block;
@@ -16,10 +17,17 @@ const Svg = styled.svg`
 export const Icon: FunctionComponent<IconProps> = ({
   icon,
   size = 24,
+  color,
   ...props
 }: IconProps) => {
   return (
-    <Svg viewBox="0 0 24 24" width={size} height={size} {...props}>
+    <Svg
+      viewBox="0 0 24 24"
+      color={color}
+      width={size}
+      height={size}
+      {...props}
+    >
       <>{icons[icon]}</>
     </Svg>
   );
@@ -30,4 +38,5 @@ export type IconType = keyof typeof icons;
 export interface IconProps {
   icon: IconType;
   size?: number;
+  color?: colorKeyOfType;
 }
