@@ -17,6 +17,7 @@ interface ButtonProps extends marginCssType {
   disabled?: boolean;
   iconDirection?: iconDirectionType;
   iconName?: IconType;
+  onClick?: () => void;
 }
 
 export const Button = ({
@@ -28,11 +29,13 @@ export const Button = ({
   iconName,
   iconDirection = 'Left',
   margin,
+  onClick,
 }: ButtonProps) => {
   const [press, setPress] = useState(false);
 
   return (
     <_Wrapper
+      onClick={onClick}
       className={className}
       size={size}
       kind={kind}

@@ -19,11 +19,13 @@ export const Icon: FunctionComponent<IconProps> = ({
   icon,
   size = 24,
   color,
+  onClick,
   ...props
 }: IconProps) => {
   return (
     <Svg
       viewBox="0 0 24 24"
+      onClick={onClick}
       width={size}
       height={size}
       color={C[color ?? 'gray90']}
@@ -40,4 +42,5 @@ export interface IconProps {
   icon: IconType;
   size?: number;
   color?: colorKeyOfType;
+  onClick?: () => void;
 }
