@@ -85,7 +85,20 @@ const _Wrapper = styled.button<ButtonProps>`
         return '50px';
     }
   }};
-  ${F.font.Heading6};
+  ${({ size }) => {
+    switch (size) {
+      case 'L':
+      case 'M':
+        return F.font.Heading6;
+      case 'S':
+        return F.font.Body1;
+      case 'XS':
+      case 'XXS':
+        return F.font.Body2;
+      default:
+        return F.font.Heading6;
+    }
+  }};
   min-width: ${({ size }) => {
     switch (size) {
       case 'L':
