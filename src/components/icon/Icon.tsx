@@ -20,6 +20,7 @@ export const Icon: FunctionComponent<IconProps> = ({
   size = 24,
   color,
   onClick,
+  cursor,
   ...props
 }: IconProps) => {
   return (
@@ -29,6 +30,7 @@ export const Icon: FunctionComponent<IconProps> = ({
       width={size}
       height={size}
       color={C[color ?? 'gray90']}
+      cursor={cursor}
       {...props}
     >
       <>{icons[icon]}</>
@@ -43,4 +45,5 @@ export interface IconProps {
   size?: number;
   color?: colorKeyOfType;
   onClick?: () => void;
+  cursor?: 'pointer' | 'auto' | 'default' | 'not-allowed';
 }
