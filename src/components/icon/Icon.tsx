@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { icons } from '../../styles/icon';
 import { colorKeyOfType } from '../../styles/theme/color';
+import * as C from '../../styles/theme/color';
 
 const Svg = styled.svg`
   display: inline-block;
@@ -23,9 +24,9 @@ export const Icon: FunctionComponent<IconProps> = ({
   return (
     <Svg
       viewBox="0 0 24 24"
-      color={color}
       width={size}
       height={size}
+      color={C[color ?? 'gray90']}
       {...props}
     >
       <>{icons[icon]}</>

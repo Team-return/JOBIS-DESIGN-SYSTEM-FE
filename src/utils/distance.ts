@@ -1,6 +1,5 @@
 import { directionType } from '../types/direction';
 
-/** 이거 배열말고 그냥 매개변수로 받아야 타이핑이 줄어들음 */
 type marginType =
   | [number, number, number, number]
   | [number | directionType, number | 'auto']

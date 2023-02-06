@@ -11,9 +11,10 @@ export const color = {
   gray70: '#444444',
   gray80: '#333333',
   gray90: '#000000',
-  red: '#e74c3c',
-  green: '#2ecc71',
-  yellow: '#f1c40f',
+  error: '#e74c3c',
+  success: '#2ecc71',
+  warning: '#f1c40f',
+  skyblue: '#2492F4',
 } as const;
 
 export const {
@@ -29,9 +30,10 @@ export const {
   gray70,
   gray80,
   gray90,
-  red,
-  green,
-  yellow,
+  error,
+  success,
+  warning,
+  skyblue,
 } = color;
 
 export type colorKeyOfType = keyof typeof color;
