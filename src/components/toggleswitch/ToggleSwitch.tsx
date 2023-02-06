@@ -8,7 +8,7 @@ import { SwitchOff } from './SwitchOff';
 interface ToggleSwitchProps extends marginCssType {
   //   label?: string;
   className?: string;
-  disabled: boolean;
+  disabled?: boolean;
   isClick?: boolean;
   onClick?: () => void;
 }

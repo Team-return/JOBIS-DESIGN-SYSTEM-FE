@@ -7,7 +7,7 @@ import * as F from '../../styles/theme/font';
 interface DropDownProps extends marginCssType {
   //   label?: string;
   className?: string;
-  disabled: boolean;
+  disabled?: boolean;
   onClick?: () => void;
 }
 

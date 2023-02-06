@@ -10,18 +10,20 @@ import { Icon, IconType } from '../icon/Icon';
 type kindType = 'LineInput' | 'DefaultInput';
 
 export interface InputProps extends marginCssType {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   width?: number;
   className?: string;
   placeHolder?: string;
-  kind: kindType;
-  disabled: boolean;
-  value: string | number;
+  kind?: kindType;
+  disabled?: boolean;
+  value?: string | number;
   iconName?: IconType;
   onClick?: () => void;
   message?: string;
-  error: boolean;
+  error?: boolean;
+  type?: 'text' | 'password' | 'number';
+  name?: string;
 }
 
 export const Input = ({
@@ -38,6 +40,8 @@ export const Input = ({
   margin,
   message,
   error = false,
+  type,
+  name,
 }: InputProps) => {
   return (
     <_Wrapper margin={margin}>
@@ -48,6 +52,7 @@ export const Input = ({
       )}
       <_Container width={width}>
         <_BaseInput
+          type={type}
           onChange={onChange}
           className={className}
           value={value}
@@ -56,9 +61,14 @@ export const Input = ({
           width={width}
           kind={kind}
           error={error}
+          name={name}
           onClick={onClick}
         />
-        <_Icon>{iconName && <Icon icon={iconName} />}</_Icon>
+        <_Icon>
+          {iconName && (
+            <Icon icon={iconName} color={IconColor(disabled, error)} />
+          )}
+        </_Icon>
       </_Container>
       {!disabled && message && <_Message error={error}>{message}</_Message>}
     </_Wrapper>
@@ -72,14 +82,14 @@ const _Wrapper = styled.div<marginCssType>`
 const _FieldLabel = styled.div<{ error: boolean; disabled: boolean }>`
   margin-bottom: 3px;
   color: ${({ error, disabled }) =>
-    !disabled ? (error ? C.red : C.gray70) : C.gray50};
+    !disabled ? (error ? C.error : C.gray70) : C.gray50};
   ${F.font.Body4};
 `;
 
 const _Message = styled.div<{ error: boolean }>`
   margin-top: 5px;
   ${F.font.Caption};
-  color: ${({ error }) => (error ? C.red : C.gray60)};
+  color: ${({ error }) => (error ? C.error : C.gray60)};
   ${F.font.Body4};
 `;
 
@@ -118,5 +128,9 @@ export const _BaseInput = styled.input<InputProps>`
       default:
         return '';
     }
-  }}
+  }};
 `;
+
+const IconColor = (disabled: boolean, error: boolean) => {
+  return disabled ? 'gray50' : error ? 'error' : 'gray90';
+};

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { marginCssType, marginToCss } from '../../utils/distance';
 
 interface CheckBoxProps extends marginCssType {
-  //   label?: string;
+  //TODO label?: string;
   className?: string;
-  disabled: boolean;
+  disabled?: boolean;
   checked?: boolean;
   onClick?: () => void;
 }
