@@ -19,6 +19,7 @@ export interface InputProps extends marginCssType {
   disabled?: boolean;
   value?: string | number;
   iconName?: IconType;
+  iconClick?: () => void;
   onClick?: () => void;
   message?: string;
   error?: boolean;
@@ -37,6 +38,7 @@ export const Input = ({
   value = '',
   iconName,
   onClick,
+  iconClick,
   margin,
   message,
   error = false,
@@ -66,7 +68,11 @@ export const Input = ({
         />
         <_Icon>
           {iconName && (
-            <Icon icon={iconName} color={IconColor(disabled, error)} />
+            <Icon
+              onClick={iconClick}
+              icon={iconName}
+              color={IconColor(disabled, error)}
+            />
           )}
         </_Icon>
       </_Container>

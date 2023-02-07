@@ -17,7 +17,7 @@ export const Loading = ({ size = 180, position, isMessage }: LoadingProps) => {
     setTimeout(() => {
       setMessage((pre) => (pre >= 3 ? (pre = 0) : pre + 1));
     }, 300);
-  });
+  }, [message]);
 
   return (
     <_Wrapper pos={position ?? 'center'}>
