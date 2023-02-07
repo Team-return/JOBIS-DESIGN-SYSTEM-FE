@@ -13,4 +13,6 @@ const Template: ComponentStory<typeof DropDown> = (args) => (
 );
 
 export const Off = Template.bind({});
-Off.args = {};
+Off.args = {
+  option: ['드롭다운'],
+};

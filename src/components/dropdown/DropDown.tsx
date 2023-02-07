@@ -3,12 +3,14 @@ import styled, { css } from 'styled-components';
 import { marginCssType, marginToCss } from '../../utils/distance';
 import * as C from '../../styles/theme/color';
 import * as F from '../../styles/theme/font';
+import Arrow from '../../styles/icons/Arrow';
 
 interface DropDownProps extends marginCssType {
   //   label?: string;
   className?: string;
   disabled?: boolean;
   onClick?: () => void;
+  option?: string[];
 }
 
 export const DropDown = ({
@@ -16,15 +18,28 @@ export const DropDown = ({
   disabled = false,
   onClick,
   margin,
+  option,
 }: DropDownProps) => {
   return (
-    <_CheckBoxWrapper>
-      <Selector value="dropdown" disabled={disabled} />
-    </_CheckBoxWrapper>
+    <_DropdownWrapper>
+      <Selector
+        className={className}
+        onClick={onClick}
+        margin={margin}
+        disabled={disabled}
+      >
+        {option?.map((res) => {
+          return <Options>{res}</Options>;
+        })}
+      </Selector>
+      <Img />
+    </_DropdownWrapper>
   );
 };
 
-const _CheckBoxWrapper = styled.div`
+const _DropdownWrapper = styled.div`
+  position: relative;
+  width: 137px;
   display: flex;
   align-items: center;
 `;
@@ -44,5 +59,18 @@ const Selector = styled.select<DropDownProps>`
     props.disabled &&
     css`
       cursor: not-allowed;
+      background-color: ${C.gray40};
+      color: ${C.gray50};
     `}
+  ${({ margin }) => marginToCss({ margin })};
+`;
+
+const Options = styled.option`
+  width: 137px;
+  height: 45px;
+`;
+
+const Img = styled(Arrow)`
+  position: absolute;
+  right: 12px;
 `;
