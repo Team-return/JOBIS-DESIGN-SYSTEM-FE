@@ -1,10 +1,14 @@
 import ChevronBarDownIcon from './icons/ChevronBarDownIcon';
+import ChevronDown from './icons/ChevronDown';
 import Close from './icons/Close';
 import DateIcon from './icons/DateIcon';
+import Download from './icons/Download';
 import EyesClose from './icons/EyesClose';
 import EyesOpen from './icons/EyesOpen';
 import FileEarmarkArrowDownIcon from './icons/FileEarmarkArrowDownIcon';
 import FileEarmarkPlusIcon from './icons/FileEarmarkPlusIcon';
+import Logout from './icons/Logout';
+import Plus from './icons/Plus';
 import SearchIcon from './icons/SearchIcon';
 import ToastError from './icons/ToastError';
 import ToastMessage from './icons/ToastMessage';
@@ -27,4 +31,8 @@ export const icons = {
   ToastWarning: <ToastWarning />,
   ToastMessage: <ToastMessage />,
   Close: <Close />,
+  Download: <Download />,
+  Logout: <Logout />,
+  Plus: <Plus />,
+  ChevronDown: <ChevronDown />,
 } as const;
