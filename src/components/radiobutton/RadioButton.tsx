@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { marginCssType, marginToCss } from '../../utils/distance';
 import * as C from '../../styles/theme/color';
 import * as F from '../../styles/theme/font';
 
 interface RadioButtonProps extends marginCssType {
-  //   label?: string;
+  children?: React.ReactNode;
   className?: string;
   disabled?: boolean;
   onClick?: () => void;
+  value?: any;
+  name?: string;
 }
 
 export const RadioButton = ({
@@ -16,23 +18,30 @@ export const RadioButton = ({
   disabled = false,
   onClick,
   margin,
+  children,
+  name,
+  value,
 }: RadioButtonProps) => {
   return (
-    <_RadioButtonWrapper>
+    <_Label>
       <_Wrapper
         className={className}
         onClick={onClick}
         margin={margin}
-        disabled={disabled}
         type="radio"
+        value={value}
+        disabled={disabled}
+        name={name}
       />
-    </_RadioButtonWrapper>
+      {children}
+    </_Label>
   );
 };
 
-const _RadioButtonWrapper = styled.div`
+const _Label = styled.label`
   display: flex;
   align-items: center;
+  gap: 7px;
 `;
 
 const _Wrapper = styled.input<RadioButtonProps>`

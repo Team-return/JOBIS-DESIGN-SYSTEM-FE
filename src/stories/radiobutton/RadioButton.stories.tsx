@@ -13,4 +13,6 @@ const Template: ComponentStory<typeof RadioButton> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  children: '라벨',
+};

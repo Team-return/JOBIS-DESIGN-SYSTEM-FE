@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children, ReactNode } from 'react';
 import styled from 'styled-components';
 import { marginCssType, marginToCss } from '../../utils/distance';
 
@@ -8,6 +8,7 @@ interface CheckBoxProps extends marginCssType {
   disabled?: boolean;
   checked?: boolean;
   onClick?: () => void;
+  children?: ReactNode;
 }
 
 export const CheckBox = ({
@@ -16,6 +17,7 @@ export const CheckBox = ({
   checked,
   onClick,
   margin,
+  children,
 }: CheckBoxProps) => {
   return (
     <_CheckBoxWrapper>
@@ -27,6 +29,7 @@ export const CheckBox = ({
         type="checkbox"
         checked={checked}
       />
+      {children}
     </_CheckBoxWrapper>
   );
 };
@@ -34,6 +37,7 @@ export const CheckBox = ({
 const _CheckBoxWrapper = styled.div`
   display: flex;
   align-items: center;
+  gap: 7px;
 `;
 
 const _Wrapper = styled.input<CheckBoxProps>`
