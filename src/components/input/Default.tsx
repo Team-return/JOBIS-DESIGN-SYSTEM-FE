@@ -4,6 +4,7 @@ import * as F from '../../styles/theme/font';
 
 export const DefaultInput = (error?: boolean, disabled?: boolean) => {
   return css`
+    padding: 0 10px 0 15px;
     height: 45px;
     transition: 0.5s;
     border: 1px solid ${!disabled && error ? C.error : C.gray40};

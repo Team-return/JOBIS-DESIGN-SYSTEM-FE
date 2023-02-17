@@ -6,6 +6,7 @@ export const LineInput = (error?: boolean) => {
   return css`
     transition: 0.5s;
     height: 35px;
+    padding: 0 10px 0 10px;
     border-bottom: 1.5px solid ${error ? C.error : C.gray40};
     background-color: ${C.gray10};
     ${F.font.Body2};

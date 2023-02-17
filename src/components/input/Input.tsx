@@ -104,7 +104,7 @@ const _Container = styled.div<{ width?: number }>`
   display: flex;
   align-items: center;
   width: ${({ width }) => width + 'px'};
-  height: 45px;
+  height: 35px;
 `;
 
 const _Icon = styled.div`
@@ -119,7 +119,6 @@ export const _BaseInput = styled.input<InputProps>`
   width: ${({ width }) => width + 'px'};
   border: 0;
   outline: 0;
-  padding: 0 10px 0 15px;
   color: ${({ disabled }) => (disabled ? C.gray50 : C.gray90)};
   &::placeholder {
     color: ${({ disabled }) => (disabled ? C.gray50 : C.gray60)};
