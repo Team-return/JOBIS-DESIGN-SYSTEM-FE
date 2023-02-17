@@ -1,60 +1,106 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { marginCssType, marginToCss } from '../../utils/distance';
 import * as C from '../../styles/theme/color';
 import * as F from '../../styles/theme/font';
-import Arrow from '../../styles/icons/Arrow';
+import { Icon } from '../icon/Icon';
+import ChevronDown from '../../styles/icons/ChevronDown';
 
 interface DropDownProps extends marginCssType {
   //   label?: string;
   className?: string;
   disabled?: boolean;
-  onClick?: () => void;
+  onChange?: () => void;
   option?: string[];
+  width?: number;
 }
 
 export const DropDown = ({
   className,
   disabled = false,
-  onClick,
   margin,
   option,
+  onChange,
+  width,
 }: DropDownProps) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [data, setData] = useState<string>(option ? option[0] : '없음');
+  const outsideRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: React.MouseEvent<HTMLElement>) {
+      // 현재 document에서 mousedown 이벤트가 동작하면 호출되는 함수입니다.
+      if (outsideRef.current && !outsideRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [outsideRef]);
+
   return (
-    <_DropdownWrapper>
-      <Selector
+    <_DropdownWrapper ref={outsideRef}>
+      <_Selector
         className={className}
-        onClick={onClick}
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
         margin={margin}
         disabled={disabled}
+        onChange={onChange}
+        width={width}
       >
-        {option?.map((res) => {
-          return <Options>{res}</Options>;
-        })}
-      </Selector>
-      <Img />
+        {data}
+        <_Img isOpen={isOpen}>
+          <ChevronDown></ChevronDown>
+        </_Img>
+      </_Selector>
+      {isOpen && option && option.length > 1 && (
+        <_Items width={width} isOpen={isOpen}>
+          {option
+            ?.filter((res) => data !== res)
+            .map((res) => {
+              return (
+                <_Item
+                  onClick={() => {
+                    setData(res);
+                    setIsOpen(false);
+                  }}
+                >
+                  {res}
+                </_Item>
+              );
+            })}
+        </_Items>
+      )}
     </_DropdownWrapper>
   );
 };
 
 const _DropdownWrapper = styled.div`
-  position: relative;
   width: 137px;
   display: flex;
-  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
 `;
 
-const Selector = styled.select<DropDownProps>`
-  appearance: none;
+const _Selector = styled.div<DropDownProps>`
+  position: relative;
   border: 0;
   border: 1px solid ${C.gray40};
   ${F.font.Body4};
-  padding: 10px 3em 10px 15px;
-  position: relative;
-  outline: none;
-  min-width: 137px;
+  padding: 10px 10px 10px 15px;
+  height: 45px;
+  width: ${({ width }) => width};
   margin: 0;
-  display: block;
+  display: flex;
+  align-items: center;
+  z-index: 99;
+  cursor: pointer;
   ${(props) =>
     props.disabled &&
     css`
@@ -65,12 +111,41 @@ const Selector = styled.select<DropDownProps>`
   ${({ margin }) => marginToCss({ margin })};
 `;
 
-const Options = styled.option`
-  width: 137px;
-  height: 45px;
+const _Items = styled.div<{ width?: number; isOpen?: boolean }>`
+  width: ${({ width }) => width};
+  margin-top: 5px;
+  overflow: scroll;
+  max-height: 180px;
+  border: 1px solid ${C.gray40};
+  @keyframes dropdown {
+    0% {
+      max-height: 0px;
+    }
+    100% {
+      max-height: 180px;
+    }
+  }
+  animation: dropdown 0.4s ease;
 `;
 
-const Img = styled(Arrow)`
+const _Item = styled.div`
+  display: flex;
+  align-items: center;
+  width: 137px;
+  height: 45px;
+  padding-left: 15px;
+  ${F.font.Body1};
+  color: ${C.gray60};
+  z-index: 1;
+  &:hover {
+    background-color: ${C.gray30};
+    cursor: pointer;
+  }
+`;
+
+const _Img = styled.div<{ isOpen?: boolean }>`
   position: absolute;
-  right: 12px;
+  right: 10px;
+  rotate: ${({ isOpen }) => (isOpen ? '180deg' : '0deg')};
+  transition-duration: 0.2s;
 `;
