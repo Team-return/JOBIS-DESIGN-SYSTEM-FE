@@ -26,11 +26,15 @@ export const Modal = ({
   onCancel,
   onConfirm,
 }: ModalProps) => {
+  const EventBubbling = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+  };
+
   return (
     <>
       {visible && (
-        <_Background>
-          <_Wrapper>
+        <_Background onClick={onCancel}>
+          <_Wrapper onClick={EventBubbling}>
             <Text margin={[16, 0, 0, 20]} size="Heading6" color="gray90">
               {title}
             </Text>
@@ -73,7 +77,7 @@ const _Wrapper = styled.div`
   position: relative;
   width: 400px;
   height: 181px;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: ${({ theme }) => theme.color.gray10};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   z-index: 100;
