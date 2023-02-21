@@ -25,10 +25,10 @@ export const DropDown = ({
 }: DropDownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [data, setData] = useState<string>(option ? option[0] : '없음');
-  const outsideRef = useRef(null);
+  const outsideRef = useRef<any>(null);
 
   useEffect(() => {
-    function handleClickOutside(event: React.MouseEvent<HTMLElement>) {
+    function handleClickOutside(event: any) {
       // 현재 document에서 mousedown 이벤트가 동작하면 호출되는 함수입니다.
       if (outsideRef.current && !outsideRef.current.contains(event.target)) {
         setIsOpen(false);
