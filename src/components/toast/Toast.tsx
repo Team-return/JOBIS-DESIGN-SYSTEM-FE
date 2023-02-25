@@ -4,11 +4,11 @@ import { Icon } from '../icon/Icon';
 import { Text } from '../Text/Text';
 import * as C from '../../styles/theme/color';
 
-type type = 'GREEN' | 'RED' | 'YELLOW' | 'BLUE';
+export type ColorType = 'GREEN' | 'RED' | 'YELLOW' | 'BLUE';
 
 export interface ToastProps {
   id?: number;
-  type?: type;
+  type?: ColorType;
   title?: string;
   message: string;
   time?: number;
@@ -90,7 +90,7 @@ const Progress = styled.div<{ progress?: number }>`
   transition: 0.2s;
 `;
 
-const BackGroundColor = (type: type) => {
+const BackGroundColor = (type: ColorType) => {
   switch (type) {
     case 'GREEN':
       return C.success;
@@ -103,7 +103,7 @@ const BackGroundColor = (type: type) => {
   }
 };
 
-const IconName = (type: type) => {
+const IconName = (type: ColorType) => {
   switch (type) {
     case 'GREEN':
       return 'ToastSuccess';

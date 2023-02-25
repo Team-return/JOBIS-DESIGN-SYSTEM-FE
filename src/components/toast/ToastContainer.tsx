@@ -1,31 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Toast, ToastProps } from './Toast';
+import { toastStateContext } from '../../context/ToastContext';
+import { ColorType, Toast, ToastProps } from './Toast';
 
 export const ToastContainer = ({}) => {
-  const [list, setList] = useState<ToastProps[]>([
-    { title: '제목', message: '메세지', type: 'GREEN' },
-  ]);
-  let toastProperties = null;
-
-  const AddToast = ({ title, message, type }: ToastProps) => {
-    setList([...list, { id: list.length + 1, title, message, type }]);
-    console.log(list);
-  };
-
-  useEffect(() => {
-    setTimeout(() => {
-      AddToast({ title: '제목', message: '메세지', type: 'BLUE' });
-    }, 3000);
-    AddToast({ title: '오류', message: 'Message', type: 'RED' });
-  }, []);
+  const toastState = useContext(toastStateContext);
 
   return (
     <_Container>
-      {list.map((list) => {
+      {/* {toastState.lists.map((list) => {
         const { title, message, type } = list;
-        return <Toast type={type} title={title} message={message}></Toast>;
-      })}
+        return <Toast type={type} title={title} message={message} />;
+      })} */}
     </_Container>
   );
 };

@@ -13,6 +13,7 @@ interface TableProps {
   tableData?: any;
   width: number[];
   columns?: number;
+  name?: string;
 }
 
 export const Table = ({
@@ -21,6 +22,7 @@ export const Table = ({
   title = [],
   width,
   columns = 5,
+  name,
 }: TableProps) => {
   let col = Array(tableData.length).fill(0);
   let column = Array(columns - tableData.length).fill(0);
@@ -29,7 +31,7 @@ export const Table = ({
     <>
       <THeader>
         {toggle && toggle !== 'None' && (
-          <ToggleHeader>{Toggles(toggle)}</ToggleHeader>
+          <ToggleHeader>{Toggles(toggle, true)}</ToggleHeader>
         )}
         {title?.map((res, i) => {
           return <HeadCell width={width[i] ?? 100}>{res}</HeadCell>;
@@ -38,7 +40,7 @@ export const Table = ({
       {col?.map((res, index) => (
         <TBody>
           {toggle && toggle !== 'None' && (
-            <ToggleHeader>{Toggles(toggle)}</ToggleHeader>
+            <ToggleHeader>{Toggles(toggle, false, name)}</ToggleHeader>
           )}
           {tableData[index]?.map((res: any, i: any) => {
             return <BodyCell width={width[i]}>{res}</BodyCell>;
@@ -49,12 +51,12 @@ export const Table = ({
   );
 };
 
-const Toggles = (toggle: toggleType) => {
+const Toggles = (toggle: toggleType, head?: boolean, name?: string) => {
   switch (toggle) {
     case 'CheckBox':
-      return <CheckBox />;
+      return <CheckBox disabled={head} />;
     case 'Radio':
-      return <RadioButton />;
+      return <RadioButton name={name} disabled={head} />;
   }
 };
 
