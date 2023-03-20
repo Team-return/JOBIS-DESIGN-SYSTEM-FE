@@ -41,15 +41,20 @@ export const Button = ({
       kind={kind}
       disabled={disabled}
       margin={margin}
-      onMouseDown={(res) => setPress(!res)}
+      onMouseDown={() => setPress(true)}
+      onMouseUp={() => setPress(false)}
     >
       {iconDirection === 'Left' && iconName && (
-        <Icon size={16} icon={iconName} />
+        <Icon
+          size={IconSize(size)}
+          icon={iconName}
+          color={IconColor(kind, disabled, press)}
+        />
       )}
-      {children}
+      {!(size === 'ONLYICON') && children}
       {iconDirection === 'Right' && iconName && (
         <Icon
-          size={16}
+          size={IconSize(size)}
           icon={iconName}
           color={IconColor(kind, disabled, press)}
         />
@@ -129,6 +134,10 @@ const cssGenerator = (kind: kindType, disabled: boolean) => {
         &:hover {
           background-color: ${!disabled && C.blue};
         }
+        &:active {
+          background-color: ${!disabled && C.darkBlue};
+          color: ${!disabled && C.gray10};
+        }
       `;
     case 'Ghost':
       return css`
@@ -183,16 +192,30 @@ const cssGenerator = (kind: kindType, disabled: boolean) => {
   }
 };
 
-const IconColor = (kind: kindType, disabled: boolean, res: boolean) => {
+const IconColor = (kind: kindType, disabled: boolean, isPress: boolean) => {
   switch (kind) {
     case 'Solid':
       return 'gray10';
     case 'Ghost':
     case 'Light':
-      return disabled ? 'gray50' : res ? 'gray10' : 'liteBlue';
     case 'Shadow':
-      return disabled ? 'gray50' : res ? 'gray10' : 'gray90';
+      return disabled ? 'gray50' : isPress ? 'gray10' : 'liteBlue';
+    case 'Gray':
+      return disabled ? 'gray50' : isPress ? 'gray10' : 'gray80';
     default:
       return 'gray90';
+  }
+};
+
+const IconSize = (size: sizeType) => {
+  switch (size) {
+    case 'L':
+      return 18;
+    case 'M':
+      return 17;
+    case 'S':
+      return 15;
+    default:
+      return 14;
   }
 };

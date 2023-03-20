@@ -25,7 +25,7 @@ export const DropDown = ({
 }: DropDownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [data, setData] = useState<string>(option ? option[0] : '없음');
-  const outsideRef = useRef<any>(null);
+  const outsideRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: any) {

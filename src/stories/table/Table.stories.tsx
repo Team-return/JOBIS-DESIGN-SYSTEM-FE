@@ -13,9 +13,15 @@ const Template: ComponentStory<typeof Table> = (args) => <Table {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   width: [100, 200, 200],
-  title: ['ID', 'PASSWORD', 'EMAIL'],
+  title: [<>ID</>, <>PASSWORD</>, <>EMAIL</>],
   tableData: [
-    ['1', '1234', '@gmail'],
-    ['2', '2134', '@naver'],
+    [<>1</>, <>1234</>, <>@gmail</>],
+    [<>2</>, <>2134</>, <>@naver</>],
+    [<>2</>, <>2134</>, <>@naver</>],
+    [<>2</>, <>2134</>, <>@naver</>],
+    [<>2</>, <>2134</>, <>@naver</>],
+    [<>2</>, <>2134</>, <>@naver</>],
+    [<>2</>, <>2134</>, <>@naver</>],
+    [<>2</>, <>2134</>, <>@naver</>],
   ],
 };

@@ -9,8 +9,8 @@ type toggleType = 'Radio' | 'CheckBox' | 'None';
 
 interface TableProps {
   toggle?: toggleType;
-  title: string[];
-  tableData?: any;
+  title: JSX.Element[];
+  tableData?: JSX.Element[][];
   width: number[];
   columns?: number;
   name?: string;
@@ -21,12 +21,9 @@ export const Table = ({
   tableData = [],
   title = [],
   width,
-  columns = 5,
   name,
 }: TableProps) => {
   let col = Array(tableData.length).fill(0);
-  let column = Array(columns - tableData.length).fill(0);
-  let row = Array(title.length).fill(0);
   return (
     <>
       <THeader>
@@ -37,7 +34,7 @@ export const Table = ({
           return <HeadCell width={width[i] ?? 100}>{res}</HeadCell>;
         })}
       </THeader>
-      {col?.map((res, index) => (
+      {tableData?.map((res, index) => (
         <TBody>
           {toggle && toggle !== 'None' && (
             <ToggleHeader>{Toggles(toggle, false, name)}</ToggleHeader>

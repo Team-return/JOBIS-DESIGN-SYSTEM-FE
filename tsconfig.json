@@ -16,6 +16,6 @@
     "outDir": "./dist",
     "declaration": true
   },
-  "include": ["src", "src/custom.d.ts"],
+  "include": ["src", "src/custom.d.ts", "src/styles"],
   "exclude": ["build", "src/stories/*", "node_modules", "build"]
 }

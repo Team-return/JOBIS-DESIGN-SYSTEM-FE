@@ -9,7 +9,7 @@ interface RadioButtonProps extends marginCssType {
   className?: string;
   disabled?: boolean;
   onClick?: () => void;
-  value?: any;
+  value?: string;
   name?: string;
 }
 
