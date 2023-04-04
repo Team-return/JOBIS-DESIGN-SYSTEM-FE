@@ -59,7 +59,7 @@ const Toggles = (toggle: toggleType, head?: boolean, name?: string) => {
 
 const ToggleHeader = styled.div`
   width: 63px;
-  height: 72px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,7 +69,7 @@ const ToggleHeader = styled.div`
 
 const THeader = styled.div`
   display: flex;
-  height: 72px;
+  height: 60px;
 `;
 
 const HeadCell = styled.div<{ width?: number }>`
@@ -84,7 +84,7 @@ const HeadCell = styled.div<{ width?: number }>`
 
 const TBody = styled.div`
   display: flex;
-  height: 72px;
+  height: 50px;
 `;
 
 const BodyCell = styled.div<{ width?: number }>`
