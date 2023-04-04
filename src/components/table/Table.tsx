@@ -37,7 +37,7 @@ export const Table = ({
       {tableData?.map((res, index) => (
         <TBody>
           {toggle && toggle !== 'None' && (
-            <ToggleHeader>{Toggles(toggle, false, name)}</ToggleHeader>
+            <ToggleBody>{Toggles(toggle, false, name)}</ToggleBody>
           )}
           {tableData[index]?.map((res: any, i: any) => {
             return <BodyCell width={width[i]}>{res}</BodyCell>;
@@ -65,6 +65,10 @@ const ToggleHeader = styled.div`
   align-items: center;
   border: 1px solid ${C.gray40};
   background-color: ${C.gray20};
+`;
+
+const ToggleBody = styled(ToggleHeader)`
+  height: 50px;
 `;
 
 const THeader = styled.div`
