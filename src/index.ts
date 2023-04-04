@@ -10,6 +10,6 @@ export * from './components/radiobutton/RadioButton';
 export * from './components/modal/Modal';
 export * from './components/table/Table';
 export * from './components/toast/Toast';
-export * from './components/loading/Loading';
+// export * from './components/loading/Loading';
 export * from './context/ToastContext';
 export * from './components/toast/ToastContainer';
