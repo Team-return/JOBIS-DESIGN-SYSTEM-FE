@@ -60,7 +60,6 @@ export const Input = ({
           value={value}
           disabled={disabled}
           placeholder={placeHolder}
-          width={width}
           kind={kind}
           error={error}
           name={name}
@@ -103,7 +102,7 @@ const _Container = styled.div<{ width?: number }>`
   position: relative;
   display: flex;
   align-items: center;
-  width: ${({ width }) => width + 'px'};
+  width: ${({ width }) => width + '%'};
   height: 35px;
 `;
 
@@ -116,7 +115,7 @@ const _Icon = styled.div`
 
 export const _BaseInput = styled.input<InputProps>`
   position: absolute;
-  width: ${({ width }) => width + 'px'};
+  width: 100%;
   border: 0;
   outline: 0;
   color: ${({ disabled }) => (disabled ? C.gray50 : C.gray90)};

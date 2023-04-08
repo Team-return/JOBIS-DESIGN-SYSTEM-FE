@@ -23,9 +23,8 @@ export const Table = ({
   width,
   name,
 }: TableProps) => {
-  let col = Array(tableData.length).fill(0);
   return (
-    <>
+    <Wrapper>
       <THeader>
         {toggle && toggle !== 'None' && (
           <ToggleHeader>{Toggles(toggle, true)}</ToggleHeader>
@@ -44,7 +43,7 @@ export const Table = ({
           })}
         </TBody>
       ))}
-    </>
+    </Wrapper>
   );
 };
 
@@ -56,6 +55,10 @@ const Toggles = (toggle: toggleType, head?: boolean, name?: string) => {
       return <RadioButton name={name} disabled={head} />;
   }
 };
+
+const Wrapper = styled.div`
+  width: 100%;
+`;
 
 const ToggleHeader = styled.div`
   width: 63px;
@@ -83,7 +86,7 @@ const HeadCell = styled.div<{ width?: number }>`
   border: 1px solid ${C.gray40};
   background-color: ${C.gray20};
   ${F.font.Heading5};
-  width: ${({ width }) => width + 'px'};
+  width: ${({ width }) => width + '%'};
 `;
 
 const TBody = styled.div`
@@ -97,5 +100,5 @@ const BodyCell = styled.div<{ width?: number }>`
   align-items: center;
   border: 1px solid ${C.gray40};
   ${F.font.Heading5};
-  width: ${({ width }) => width + 'px'};
+  width: ${({ width }) => width + '%'};
 `;

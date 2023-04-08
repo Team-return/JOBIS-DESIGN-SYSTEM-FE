@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof Table> = (args) => <Table {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  width: [100, 200, 200],
+  width: [10, 20, 30],
   title: [<>ID</>, <>PASSWORD</>, <>EMAIL</>],
   tableData: [
     [<>1</>, <>1234</>, <>@gmail</>],

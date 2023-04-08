@@ -42,7 +42,7 @@ export const DropDown = ({
   }, [outsideRef]);
 
   return (
-    <_DropdownWrapper ref={outsideRef}>
+    <_DropdownWrapper width={width} ref={outsideRef}>
       <_Selector
         className={className}
         onClick={() => {
@@ -80,10 +80,9 @@ export const DropDown = ({
   );
 };
 
-const _DropdownWrapper = styled.div`
-  width: 137px;
+const _DropdownWrapper = styled.div<{ width?: number }>`
+  width: ${(width) => width + '%'};
   display: flex;
-  justify-content: center;
   flex-direction: column;
   overflow: hidden;
 `;
@@ -95,7 +94,7 @@ const _Selector = styled.div<DropDownProps>`
   ${F.font.Body4};
   padding: 10px 10px 10px 15px;
   height: 45px;
-  width: ${({ width }) => width};
+  width: ${({ width }) => width + '%'};
   margin: 0;
   display: flex;
   align-items: center;
@@ -112,11 +111,12 @@ const _Selector = styled.div<DropDownProps>`
 `;
 
 const _Items = styled.div<{ width?: number; isOpen?: boolean }>`
-  width: ${({ width }) => width};
+  width: ${({ width }) => width + '%'};
   margin-top: 5px;
   overflow: scroll;
   max-height: 180px;
   border: 1px solid ${C.gray40};
+  z-index: 99;
   @keyframes dropdown {
     0% {
       max-height: 0px;
