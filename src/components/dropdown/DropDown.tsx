@@ -5,6 +5,7 @@ import * as C from '../../styles/theme/color';
 import * as F from '../../styles/theme/font';
 import { Icon } from '../icon/Icon';
 import ChevronDown from '../../styles/icons/ChevronDown';
+import { theme } from '../../styles/theme';
 
 interface DropDownProps extends marginCssType {
   //   label?: string;
@@ -83,10 +84,10 @@ export const DropDown = ({
 };
 
 const _DropdownWrapper = styled.div<{ width?: number }>`
+  position: relative;
   width: ${({ width }) => width + '%'};
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 `;
 
 const _Selector = styled.div<DropDownProps>`
@@ -113,12 +114,14 @@ const _Selector = styled.div<DropDownProps>`
 `;
 
 const _Items = styled.div<{ width?: number; isOpen?: boolean }>`
+  position: absolute;
   width: 100%;
-  margin-top: 5px;
+  margin-top: 50px;
   overflow: scroll;
   max-height: 180px;
   border: 1px solid ${C.gray40};
   z-index: 99;
+  background-color: ${theme.color.gray10};
   @keyframes dropdown {
     0% {
       max-height: 0px;
