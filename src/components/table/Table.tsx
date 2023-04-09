@@ -30,16 +30,24 @@ export const Table = ({
           <ToggleHeader>{Toggles(toggle, true)}</ToggleHeader>
         )}
         {title?.map((res, i) => {
-          return <HeadCell width={width[i] ?? 100}>{res}</HeadCell>;
+          return (
+            <HeadCell key={i} width={width[i] ?? 100}>
+              {res}
+            </HeadCell>
+          );
         })}
       </THeader>
       {tableData?.map((res, index) => (
-        <TBody>
+        <TBody key={index}>
           {toggle && toggle !== 'None' && (
             <ToggleBody>{Toggles(toggle, false, name)}</ToggleBody>
           )}
           {tableData[index]?.map((res: any, i: any) => {
-            return <BodyCell width={width[i]}>{res}</BodyCell>;
+            return (
+              <BodyCell key={i} width={width[i]}>
+                {res}
+              </BodyCell>
+            );
           })}
         </TBody>
       ))}
