@@ -9,7 +9,7 @@ interface CheckBoxProps extends marginCssType {
   checked?: boolean;
   onClick?: () => void;
   children?: ReactNode;
-  onChange: () => void;
+  onChange?: () => void;
 }
 
 export const CheckBox = ({
