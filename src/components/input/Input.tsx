@@ -30,7 +30,7 @@ export interface InputProps extends marginCssType {
 export const Input = ({
   onChange,
   label,
-  width = 450,
+  width = 30,
   className,
   placeHolder = 'Placeholder',
   kind = 'DefaultInput',
@@ -46,13 +46,13 @@ export const Input = ({
   name,
 }: InputProps) => {
   return (
-    <_Wrapper margin={margin}>
+    <_Wrapper width={width} margin={margin}>
       {label && (
         <_FieldLabel error={error} disabled={disabled}>
           {label}
         </_FieldLabel>
       )}
-      <_Container width={width}>
+      <_Container>
         <_BaseInput
           type={type}
           onChange={onChange}
@@ -80,7 +80,8 @@ export const Input = ({
   );
 };
 
-const _Wrapper = styled.div<marginCssType>`
+const _Wrapper = styled.div<{ width?: number } & marginCssType>`
+  width: ${({ width }) => width + '%'};
   ${({ margin }) => marginToCss({ margin })};
 `;
 
@@ -98,11 +99,11 @@ const _Message = styled.div<{ error: boolean }>`
   ${F.font.Body4};
 `;
 
-const _Container = styled.div<{ width?: number }>`
+const _Container = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  width: ${({ width }) => width + '%'};
+  width: 100%;
   height: 35px;
 `;
 

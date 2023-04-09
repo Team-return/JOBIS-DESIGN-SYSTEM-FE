@@ -62,9 +62,11 @@ export const DropDown = ({
         <_Items width={width} isOpen={isOpen}>
           {option
             ?.filter((res) => data !== res)
-            .map((res) => {
+            .map((res, idx) => {
               return (
                 <_Item
+                  key={idx}
+                  width={width}
                   onClick={() => {
                     setData(res);
                     setIsOpen(false);
@@ -81,7 +83,7 @@ export const DropDown = ({
 };
 
 const _DropdownWrapper = styled.div<{ width?: number }>`
-  width: ${(width) => width + '%'};
+  width: ${({ width }) => width + '%'};
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -94,7 +96,7 @@ const _Selector = styled.div<DropDownProps>`
   ${F.font.Body4};
   padding: 10px 10px 10px 15px;
   height: 45px;
-  width: ${({ width }) => width + '%'};
+  width: 100%;
   margin: 0;
   display: flex;
   align-items: center;
@@ -111,7 +113,7 @@ const _Selector = styled.div<DropDownProps>`
 `;
 
 const _Items = styled.div<{ width?: number; isOpen?: boolean }>`
-  width: ${({ width }) => width + '%'};
+  width: 100%;
   margin-top: 5px;
   overflow: scroll;
   max-height: 180px;
@@ -128,10 +130,10 @@ const _Items = styled.div<{ width?: number; isOpen?: boolean }>`
   animation: dropdown 0.4s ease;
 `;
 
-const _Item = styled.div`
+const _Item = styled.div<{ width?: number }>`
   display: flex;
   align-items: center;
-  width: 137px;
+  width: 100%;
   height: 45px;
   padding-left: 15px;
   ${F.font.Body1};
