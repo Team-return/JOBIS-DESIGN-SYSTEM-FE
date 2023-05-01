@@ -1,6 +1,6 @@
 {
   "name": "@team-return/design-system",
-  "version": "1.0.41",
+  "version": "1.0.44",
   "repository": {
     "type": "git",
     "url": "https://github.com/Team-Return/JOBIS-DESIGN-SYSTEM.git"
@@ -21,7 +21,8 @@
   "license": "MIT",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "zustand": "^4.3.7"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",

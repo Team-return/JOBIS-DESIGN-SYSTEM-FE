@@ -1,17 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { toastStateContext } from '../../context/ToastContext';
+import { toastStateContext, useToastStore } from '../../context/ToastContext';
 import { ColorType, Toast, ToastProps } from './Toast';
 
-export const ToastContainer = ({}) => {
-  const toastState = useContext(toastStateContext);
+export const ToastContainer = () => {
+  const toastState = useToastStore((state) => state.list);
 
   return (
     <_Container>
-      {/* {toastState.lists.map((list) => {
-        const { title, message, type } = list;
-        return <Toast type={type} title={title} message={message} />;
-      })} */}
+      {toastState.map((list) => {
+        const { title, id, type, message } = list;
+        return <Toast id={id} type={type} title={title} message={message} />;
+      })}
     </_Container>
   );
 };

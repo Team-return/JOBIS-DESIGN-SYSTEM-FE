@@ -8,9 +8,11 @@ import {
 } from 'react';
 
 export interface ToastState {
-  title: string;
+  id?: number;
+  title?: string;
   type: ColorType;
   message: string;
+  time?: number;
 }
 
 interface ToastList {
@@ -18,10 +20,12 @@ interface ToastList {
 }
 
 type ToastAction = {
-  actionType: 'APPEND_TOAST';
+  actionType: 'APPEND_TOAST' | 'DELETE_TOAST';
+  id?: number;
   toastType: ColorType;
   message: string;
   title?: string;
+  time?: number;
 };
 
 const toastDefaultValue: ToastList = {
@@ -37,27 +41,57 @@ export const toastDispatchContext = createContext<ToastDispatch>(() => null);
 const toastReducer = (state: ToastList, action: ToastAction): ToastList => {
   switch (action.actionType) {
     case 'APPEND_TOAST':
-    // return {
-    //   lists: state.lists.concat({
-    //     type: action.toastType,
-    //     message: action.message,
-    //     title: action.title,
-    //   }),
-    // };
+      return {
+        lists: state.lists.concat({
+          id: state.lists.length + 1,
+          title: action.title,
+          message: action.message,
+          type: action.toastType,
+        }),
+      };
+    case 'DELETE_TOAST':
+      return {
+        lists: state.lists.filter((res) => res.id !== action.id),
+      };
     default:
       return state;
   }
 };
 
-export const ToastProvider: FunctionComponent<{
-  children: ReactNode;
-}> = ({ children }) => {
-  const [toast, toastDispatch] = useReducer(toastReducer, toastDefaultValue);
-  return (
-    <toastStateContext.Provider value={toast}>
-      <toastDispatchContext.Provider value={toastDispatch}>
-        {children}
-      </toastDispatchContext.Provider>
-    </toastStateContext.Provider>
-  );
-};
+// export const ToastProvider: FunctionComponent<{
+//   children: ReactNode;
+// }> = ({ children }) => {
+//   const [toast, toastDispatch] = useReducer(toastReducer, toastDefaultValue);
+//   return (
+//     <toastStateContext.Provider value={toast}>
+//       <toastDispatchContext.Provider value={toastDispatch}>
+//         {children}
+//       </toastDispatchContext.Provider>
+//     </toastStateContext.Provider>
+//   );
+// };
+
+import { create } from 'zustand';
+
+interface BearState {
+  list: ToastState[];
+  append: (by: ToastState) => void;
+  delete: (by: ToastState) => void;
+}
+
+export const useToastStore = create<BearState>()((set) => ({
+  list: [],
+  append: (by) =>
+    set((state) => ({
+      list: state.list.concat({
+        id: state.list.length + 1,
+        title: by.title,
+        message: by.message,
+        type: by.type,
+      }),
+    })),
+  delete: (by) =>
+    set((state) => ({
+      list: state.list.filter((res) => res.id !== by.id),
+    })),
+}));

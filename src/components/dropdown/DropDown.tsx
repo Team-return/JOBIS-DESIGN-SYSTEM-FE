@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { marginCssType, marginToCss } from '../../utils/distance';
+import { marginCssType, marginToCss, marginType } from '../../utils/distance';
 import * as C from '../../styles/theme/color';
 import * as F from '../../styles/theme/font';
 import { Icon } from '../icon/Icon';
@@ -11,7 +11,7 @@ interface DropDownProps extends marginCssType {
   //   label?: string;
   className?: string;
   disabled?: boolean;
-  onChange?: () => void;
+  onChange: (value: string) => void;
   option?: string[];
   width?: number;
 }
@@ -51,7 +51,6 @@ export const DropDown = ({
         }}
         margin={margin}
         disabled={disabled}
-        onChange={onChange}
         width={width}
       >
         {data}
@@ -71,6 +70,7 @@ export const DropDown = ({
                   onClick={() => {
                     setData(res);
                     setIsOpen(false);
+                    onChange(res);
                   }}
                 >
                   {res}
@@ -90,7 +90,11 @@ const _DropdownWrapper = styled.div<{ width?: number }>`
   flex-direction: column;
 `;
 
-const _Selector = styled.div<DropDownProps>`
+const _Selector = styled.div<{
+  margin?: marginType | marginType[];
+  disabled?: boolean;
+  width?: number;
+}>`
   position: relative;
   border: 0;
   border: 1px solid ${C.gray40};

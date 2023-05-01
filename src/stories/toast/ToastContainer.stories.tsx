@@ -4,8 +4,8 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ToastContainer } from '../../components/toast/ToastContainer';
 import {
   toastDispatchContext,
-  ToastProvider,
   toastStateContext,
+  useToastStore,
 } from '../../context/ToastContext';
 
 export default {
@@ -14,39 +14,43 @@ export default {
 } as ComponentMeta<typeof ToastContainer>;
 
 const Template: ComponentStory<typeof ToastContainer> = (args) => (
-  <ToastProvider>
-    <Test></Test>
-    <ToastContainer {...args} />
-  </ToastProvider>
+  <>
+    <ToastContainer />
+    <Test />
+  </>
 );
 
 const Test = () => {
-  const state = useContext(toastStateContext);
-  const dispatch = useContext(toastDispatchContext);
+  const [list, append] = useToastStore((state) => [state.list, state.append]);
   useEffect(() => {
-    dispatch({
-      actionType: 'APPEND_TOAST',
-      toastType: 'YELLOW',
+    append({
+      type: 'YELLOW',
       message: '정보',
       title: '안녕하세요',
     });
     setTimeout(
       () =>
-        dispatch({
-          actionType: 'APPEND_TOAST',
-          toastType: 'GREEN',
+        append({
+          type: 'GREEN',
           message: '성공',
         }),
       1000
     );
     setTimeout(
       () =>
-        dispatch({
-          actionType: 'APPEND_TOAST',
-          toastType: 'RED',
+        append({
+          type: 'RED',
           message: '에러',
         }),
       2000
+    );
+    setTimeout(
+      () =>
+        append({
+          type: 'RED',
+          message: '에러',
+        }),
+      8000
     );
   }, []);
   return <div></div>;

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../icon/Icon';
 import { Text } from '../Text/Text';
 import * as C from '../../styles/theme/color';
+import { useToastStore } from '../../context/ToastContext';
 
 export type ColorType = 'GREEN' | 'RED' | 'YELLOW' | 'BLUE';
 
@@ -11,31 +12,46 @@ export interface ToastProps {
   type?: ColorType;
   title?: string;
   message: string;
-  time?: number;
 }
 
 export const Toast = ({
-  type,
+  id,
+  type = 'GREEN',
   title,
   message = 'Message',
-  time,
 }: ToastProps) => {
-  const [num, setNum] = useState<number>(time ?? 5);
-  const progress = Math.floor((num / (time ?? 5)) * 100);
+  const [num, setNum] = useState<number>(5);
+  const [isOut, setIsOut] = useState(false);
+  const progress = Math.floor((num / 5) * 100);
   useEffect(() => {
     setTimeout(() => {
       setNum((prev) => prev - 0.1);
     }, 100);
   }, [num]);
 
-  if (num < 0) {
-    setNum(5);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsOut(true);
+    }, 5000);
+    setTimeout(() => {
+      deleteToast();
+    }, 5000);
+  }, []);
+
+  const [list, del] = useToastStore((state) => [state.list, state.delete]);
+
+  function deleteToast() {
+    del({
+      id,
+      type: type as ColorType,
+      message,
+    });
   }
 
   return (
-    <_Wrapper type={type} message="">
+    <_Wrapper isOut={isOut} type={type} message="">
       <div style={{ padding: 17 }}>
-        <Icon icon={IconName(type ?? 'GREEN')} size={38} color="gray10" />
+        <Icon icon={IconName(type)} size={38} color="gray10" />
       </div>
       <div>
         <Text color="gray10" size="Heading6">
@@ -45,7 +61,7 @@ export const Toast = ({
           {message}
         </Text>
       </div>
-      <Delete>
+      <Delete onClick={deleteToast}>
         <Icon cursor="pointer" icon="Close" size={24} color="gray10" />
       </Delete>
       <Progress progress={progress}></Progress>
@@ -53,7 +69,7 @@ export const Toast = ({
   );
 };
 
-const _Wrapper = styled.div<ToastProps>`
+const _Wrapper = styled.div<ToastProps & { isOut: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -62,15 +78,26 @@ const _Wrapper = styled.div<ToastProps>`
   margin-bottom: 20px;
   border-radius: 3px;
   background-color: ${({ type }) => BackGroundColor(type ?? 'GREEN')};
+  opacity: 0.8;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
   opacity: 0.8;
-  animation: toast-in-right 1.5s;
+  animation: ${({ isOut }) => (isOut ? 'toast-out-right' : 'toast-in-right')}
+    1.5s;
   @keyframes toast-in-right {
     from {
       transform: translateX(100%);
     }
     to {
       transform: translateX(0);
+    }
+  }
+  @keyframes toast-out-right {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
     }
   }
 `;

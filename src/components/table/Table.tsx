@@ -24,8 +24,8 @@ export const Table = ({
   name,
 }: TableProps) => {
   return (
-    <Wrapper>
-      <THeader>
+    <>
+      <THeader width={width}>
         {toggle && toggle !== 'None' && (
           <ToggleHeader>{Toggles(toggle, true)}</ToggleHeader>
         )}
@@ -37,21 +37,23 @@ export const Table = ({
           );
         })}
       </THeader>
-      {tableData?.map((res, index) => (
-        <TBody key={index}>
-          {toggle && toggle !== 'None' && (
-            <ToggleBody>{Toggles(toggle, false, name)}</ToggleBody>
-          )}
-          {tableData[index]?.map((res: any, i: any) => {
-            return (
-              <BodyCell key={i} width={width[i]}>
-                {res}
-              </BodyCell>
-            );
-          })}
-        </TBody>
-      ))}
-    </Wrapper>
+      <Wrapper>
+        {tableData?.map((res, index) => (
+          <TBody key={index}>
+            {toggle && toggle !== 'None' && (
+              <ToggleBody>{Toggles(toggle, false, name)}</ToggleBody>
+            )}
+            {tableData[index]?.map((res, i) => {
+              return (
+                <BodyCell key={i} width={width[i]}>
+                  {res}
+                </BodyCell>
+              );
+            })}
+          </TBody>
+        ))}
+      </Wrapper>
+    </>
   );
 };
 
@@ -65,7 +67,9 @@ const Toggles = (toggle: toggleType, head?: boolean, name?: string) => {
 };
 
 const Wrapper = styled.div`
+  position: relative;
   width: 100%;
+  overflow: scroll;
 `;
 
 const ToggleHeader = styled.div`
@@ -82,9 +86,11 @@ const ToggleBody = styled(ToggleHeader)`
   height: 50px;
 `;
 
-const THeader = styled.div`
+const THeader = styled.div<{ width?: number[] }>`
+  width: 100%;
   display: flex;
   height: 60px;
+  overflow: hidden;
 `;
 
 const HeadCell = styled.div<{ width?: number }>`

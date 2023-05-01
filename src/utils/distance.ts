@@ -1,6 +1,6 @@
 import { directionType } from '../types/direction';
 
-type marginType =
+export type marginType =
   | [number, number, number, number]
   | [number | directionType, number | 'auto']
   | [number];

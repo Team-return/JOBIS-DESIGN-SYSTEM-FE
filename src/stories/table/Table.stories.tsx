@@ -8,7 +8,11 @@ export default {
   component: Table,
 } as ComponentMeta<typeof Table>;
 
-const Template: ComponentStory<typeof Table> = (args) => <Table {...args} />;
+const Template: ComponentStory<typeof Table> = (args) => (
+  <div style={{ width: 800 }}>
+    <Table {...args} />
+  </div>
+);
 
 export const Default = Template.bind({});
 Default.args = {
