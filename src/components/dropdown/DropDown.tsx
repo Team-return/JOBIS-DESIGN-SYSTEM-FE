@@ -3,30 +3,35 @@ import styled, { css } from 'styled-components';
 import { marginCssType, marginToCss, marginType } from '../../utils/distance';
 import * as C from '../../styles/theme/color';
 import * as F from '../../styles/theme/font';
-import { Icon } from '../icon/Icon';
 import ChevronDown from '../../styles/icons/ChevronDown';
 import { theme } from '../../styles/theme';
 
-interface DropDownProps extends marginCssType {
+interface DropDownProps<T> extends marginCssType {
   //   label?: string;
   className?: string;
   disabled?: boolean;
-  onChange: (value: string) => void;
-  option?: string[];
+  onChange: (value: T) => void;
+  value: T;
+  option: T[];
   width?: number;
 }
 
-export const DropDown = ({
+export const DropDown = <T extends string>({
   className,
   disabled = false,
   margin,
   option,
+  value,
   onChange,
   width,
-}: DropDownProps) => {
+}: DropDownProps<T>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [data, setData] = useState<string>(option ? option[0] : '없음');
+  const [data, setData] = useState<T>(value ? value : option[0]);
   const outsideRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setData(value ? value : option[0]);
+  }, [value]);
 
   useEffect(() => {
     function handleClickOutside(event: any) {
@@ -55,7 +60,7 @@ export const DropDown = ({
       >
         {data}
         <_Img isOpen={isOpen}>
-          <ChevronDown></ChevronDown>
+          <ChevronDown />
         </_Img>
       </_Selector>
       {isOpen && option && option.length > 1 && (
@@ -124,7 +129,7 @@ const _Items = styled.div<{ width?: number; isOpen?: boolean }>`
   overflow: scroll;
   max-height: 180px;
   border: 1px solid ${C.gray40};
-  z-index: 99;
+  z-index: 100;
   background-color: ${theme.color.gray10};
   @keyframes dropdown {
     0% {
