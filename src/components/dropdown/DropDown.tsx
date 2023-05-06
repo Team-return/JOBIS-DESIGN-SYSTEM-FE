@@ -11,7 +11,7 @@ interface DropDownProps<T> extends marginCssType {
   className?: string;
   disabled?: boolean;
   onChange: (value: T) => void;
-  value: T;
+  value?: T;
   option: T[];
   width?: number;
 }
