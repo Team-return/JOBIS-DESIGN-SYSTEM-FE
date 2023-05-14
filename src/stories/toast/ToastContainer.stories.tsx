@@ -2,11 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ToastContainer } from '../../components/toast/ToastContainer';
-import {
-  toastDispatchContext,
-  toastStateContext,
-  useToastStore,
-} from '../../context/ToastContext';
+import { useToastStore } from '../../context/ToastContext';
 
 export default {
   title: 'ToastContainer',

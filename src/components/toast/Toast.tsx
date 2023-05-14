@@ -40,13 +40,16 @@ export const Toast = ({
 
   const [list, del] = useToastStore((state) => [state.list, state.delete]);
 
-  function deleteToast() {
-    del({
-      id,
-      type: type as ColorType,
-      message,
-    });
-  }
+  const deleteToast = async () => {
+    setIsOut(true);
+    setTimeout(() => {
+      del({
+        id,
+        type: type as ColorType,
+        message,
+      });
+    }, 500);
+  };
 
   return (
     <_Wrapper isOut={isOut} type={type} message="">
@@ -77,6 +80,7 @@ const _Wrapper = styled.div<ToastProps & { isOut: boolean }>`
   height: 80px;
   margin-bottom: 20px;
   border-radius: 3px;
+  z-index: 200;
   background-color: ${({ type }) => BackGroundColor(type ?? 'GREEN')};
   opacity: 0.8;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);

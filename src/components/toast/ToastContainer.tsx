@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { toastStateContext, useToastStore } from '../../context/ToastContext';
-import { ColorType, Toast, ToastProps } from './Toast';
+import { useToastStore } from '../../context/ToastContext';
+import { Toast } from './Toast';
 
 export const ToastContainer = () => {
   const toastState = useToastStore((state) => state.list);
