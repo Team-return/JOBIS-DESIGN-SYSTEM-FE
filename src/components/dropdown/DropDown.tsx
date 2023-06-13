@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 import { marginCssType, marginToCss, marginType } from '../../utils/distance';
 import * as C from '../../styles/theme/color';
 import * as F from '../../styles/theme/font';
-import ChevronDown from '../../styles/icons/ChevronDown';
 import { theme } from '../../styles/theme';
+import { Icon } from '../icon/Icon';
 
 interface DropDownProps<T> extends marginCssType {
   //   label?: string;
@@ -60,7 +60,7 @@ export const DropDown = <T extends string>({
       >
         {data}
         <_Img isOpen={isOpen}>
-          <ChevronDown />
+          <Icon icon="Chevron" direction="bottom" />
         </_Img>
       </_Selector>
       {isOpen && option && option.length > 1 && (
@@ -160,6 +160,8 @@ const _Item = styled.div<{ width?: number }>`
 const _Img = styled.div<{ isOpen?: boolean }>`
   position: absolute;
   right: 10px;
+  display: flex;
+  align-items: center;
   rotate: ${({ isOpen }) => (isOpen ? '180deg' : '0deg')};
   transition-duration: 0.2s;
 `;

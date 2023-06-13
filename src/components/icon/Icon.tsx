@@ -3,24 +3,35 @@ import styled from 'styled-components';
 import { icons } from '../../styles/icon';
 import { colorKeyOfType } from '../../styles/theme/color';
 import * as C from '../../styles/theme/color';
+import { directionType } from '../../types/direction';
 
-const Svg = styled.svg`
+type DirectionRotateType = { [key: string]: number };
+
+const directionRotate: DirectionRotateType = {
+  bottom: 0,
+  left: 90,
+  top: 180,
+  right: 270,
+};
+
+const Svg = styled.svg<{ direction?: directionType }>`
   display: inline-block;
   shape-rendering: inherit;
-  transform: translate3d(0, 0, 0);
-  vertical-align: middle;
-
+  transform: rotate(
+    ${({ direction }) => directionRotate[direction ?? 'bottom'] + 'deg'}
+  );
   path {
     fill: currentColor;
   }
 `;
 
-export const Icon: FunctionComponent<IconProps> = ({
+export const Icon: React.FC<IconProps> = ({
   icon,
   size = 24,
   color,
   onClick,
   cursor,
+  direction,
   ...props
 }: IconProps) => {
   return (
@@ -30,6 +41,7 @@ export const Icon: FunctionComponent<IconProps> = ({
       width={size}
       height={size}
       color={C[color ?? 'gray90']}
+      direction={direction}
       cursor={cursor}
       {...props}
     >
@@ -46,4 +58,5 @@ export interface IconProps {
   color?: colorKeyOfType;
   onClick?: () => void;
   cursor?: 'pointer' | 'auto' | 'default' | 'not-allowed';
+  direction?: directionType;
 }

@@ -1,5 +1,5 @@
 import ChevronBarDownIcon from './icons/ChevronBarDownIcon';
-import ChevronDown from './icons/ChevronDown';
+import Chevron from './icons/Chevron';
 import Close from './icons/Close';
 import DateIcon from './icons/DateIcon';
 import Download from './icons/Download';
@@ -15,6 +15,8 @@ import ToastMessage from './icons/ToastMessage';
 import ToastSuccess from './icons/ToastSuccess';
 import ToastWarning from './icons/ToastWarning';
 import UploadIcon from './icons/UploadIcon';
+import Trash from './icons/Trash';
+import MyPg from './icons/MyPg';
 
 // Icon paths
 export const icons = {
@@ -34,5 +36,7 @@ export const icons = {
   Download: <Download />,
   Logout: <Logout />,
   Plus: <Plus />,
-  ChevronDown: <ChevronDown />,
+  Chevron: <Chevron />,
+  Trash: <Trash />,
+  MyPg: <MyPg />,
 } as const;
