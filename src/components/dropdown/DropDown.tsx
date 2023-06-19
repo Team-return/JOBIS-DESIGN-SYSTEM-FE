@@ -63,7 +63,7 @@ export const DropDown = <T extends string>({
           <Icon icon="Chevron" direction="bottom" />
         </_Img>
       </_Selector>
-      {isOpen && option && option.length > 1 && (
+      {isOpen && option && option.length > 0 && (
         <_Items width={width} isOpen={isOpen}>
           {option
             ?.filter((res) => data !== res)
