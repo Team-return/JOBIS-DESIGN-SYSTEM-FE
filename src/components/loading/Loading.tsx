@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import LoadingImg from '../../styles/icons/Loading.png';
 import { Text } from '../Text/Text';
+import LoadingImg from '../../styles/icons/Loading.png';
 
 type positionType = 'center' | 'start' | 'end';
 

@@ -22,7 +22,7 @@ module.exports = {
         test: /\.(jpeg|jpg|png|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
+          name: 'styles/icons/[name].[ext]',
         },
       },
     ],
