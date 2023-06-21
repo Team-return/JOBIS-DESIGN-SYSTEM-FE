@@ -12,7 +12,9 @@ type ItemType =
   | 'space-between'
   | 'space-evenly';
 
-type WrapType = 'nowrap' | 'wrap' | 'wrap-reverse';
+type PositionType = 'static' | 'relative' | 'absolute';
+
+type WrapType = 'nowrap' | 'wrap' | 'wrap-reverse' | 'fixed' | 'sticky';
 
 export interface StackProps extends marginCssType {
   width?: number;
@@ -23,6 +25,7 @@ export interface StackProps extends marginCssType {
   gap?: number;
   wrap?: WrapType;
   children?: ReactNode;
+  position?: PositionType;
 }
 
 export const Stack = ({
@@ -34,6 +37,7 @@ export const Stack = ({
   gap,
   margin,
   children,
+  position = 'static',
 }: StackProps) => {
   return (
     <Container
@@ -44,6 +48,7 @@ export const Stack = ({
       justify={justify}
       gap={gap}
       margin={margin}
+      position={position}
     >
       {children}
     </Container>
@@ -59,5 +64,6 @@ const Container = styled.div<StackProps>`
   justify-content: ${({ justify }) => justify};
   flex-wrap: ${({ wrap }) => wrap};
   gap: ${({ gap }) => gap}px;
+  position: ${({ position }) => position};
   ${({ margin }) => marginToCss({ margin })};
 `;

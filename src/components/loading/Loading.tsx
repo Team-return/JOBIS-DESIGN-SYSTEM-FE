@@ -32,8 +32,8 @@ export const Loading = ({ size = 180, position, isMessage }: LoadingProps) => {
 };
 
 const _Wrapper = styled.div<{ pos?: positionType }>`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: ${({ pos }) => pos};

@@ -6,6 +6,7 @@ module.exports = {
   output: {
     filename: 'bundle.min.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: 'dist/',
   },
   module: {
     rules: [
@@ -22,7 +23,9 @@ module.exports = {
         test: /\.(jpeg|jpg|png|svg)$/,
         loader: 'file-loader',
         options: {
-          name: 'styles/icons/[name].[ext]',
+          name: '[name].[ext]',
+          outputPath: 'styles/icons', // 이미지가 저장될 출력 디렉토리
+          publicPath: 'styles/icons',
         },
       },
     ],
