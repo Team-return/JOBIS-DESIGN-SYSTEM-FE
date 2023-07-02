@@ -12,9 +12,9 @@ type ItemType =
   | 'space-between'
   | 'space-evenly';
 
-type PositionType = 'static' | 'relative' | 'absolute';
+type PositionType = 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky';
 
-type WrapType = 'nowrap' | 'wrap' | 'wrap-reverse' | 'fixed' | 'sticky';
+type WrapType = 'nowrap' | 'wrap' | 'wrap-reverse';
 
 export interface StackProps extends marginCssType {
   width?: number;
@@ -56,6 +56,7 @@ export const Stack = ({
 };
 
 const Container = styled.div<StackProps>`
+  position: ${({ position }) => position};
   display: flex;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
@@ -64,6 +65,5 @@ const Container = styled.div<StackProps>`
   justify-content: ${({ justify }) => justify};
   flex-wrap: ${({ wrap }) => wrap};
   gap: ${({ gap }) => gap}px;
-  position: ${({ position }) => position};
   ${({ margin }) => marginToCss({ margin })};
 `;

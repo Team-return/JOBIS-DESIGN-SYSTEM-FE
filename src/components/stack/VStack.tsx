@@ -8,6 +8,7 @@ export const VStack = ({
   gap,
   margin,
   children,
+  position,
 }: StackProps) => {
   return (
     <Stack
@@ -18,6 +19,7 @@ export const VStack = ({
       justify={justify}
       gap={gap}
       margin={margin}
+      position={position}
     >
       {children}
     </Stack>

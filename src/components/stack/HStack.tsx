@@ -8,6 +8,7 @@ export const HStack = ({
   gap,
   margin,
   children,
+  position,
 }: StackProps) => {
   return (
     <Stack
@@ -18,6 +19,7 @@ export const HStack = ({
       justify={justify}
       gap={gap}
       margin={margin}
+      position={position}
     >
       {children}
     </Stack>
