@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { marginCssType, marginToCss } from '../../utils/distance';
 import * as C from '../../styles/theme/color';
 import * as F from '../../styles/theme/font';
@@ -21,6 +21,7 @@ export interface InputProps extends marginCssType {
   iconName?: IconType;
   iconClick?: () => void;
   onClick?: () => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   message?: string;
   error?: boolean;
   type?: 'text' | 'password' | 'number';
@@ -44,6 +45,7 @@ export const Input = ({
   error = false,
   type,
   name,
+  onKeyDown,
 }: InputProps) => {
   return (
     <_Wrapper width={width} margin={margin}>
@@ -54,6 +56,7 @@ export const Input = ({
       )}
       <_Container>
         <_BaseInput
+          onKeyDown={onKeyDown}
           type={type}
           onChange={onChange}
           className={className}
