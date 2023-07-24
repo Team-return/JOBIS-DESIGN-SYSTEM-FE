@@ -24,7 +24,7 @@ export const Table = ({
   name,
 }: TableProps) => {
   return (
-    <>
+    <div style={{ overflow: 'hidden' }}>
       <THeader width={width}>
         {toggle && toggle !== 'None' && (
           <ToggleHeader>{Toggles(toggle, true)}</ToggleHeader>
@@ -53,7 +53,7 @@ export const Table = ({
           </TBody>
         ))}
       </Wrapper>
-    </>
+    </div>
   );
 };
 
@@ -69,7 +69,7 @@ const Toggles = (toggle: toggleType, head?: boolean, name?: string) => {
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  overflow: scroll;
+  overflow: hidden;
 `;
 
 const ToggleHeader = styled.div`

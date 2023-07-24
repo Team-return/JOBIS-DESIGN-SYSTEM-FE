@@ -17,6 +17,8 @@ import ToastWarning from './icons/ToastWarning';
 import UploadIcon from './icons/UploadIcon';
 import Trash from './icons/Trash';
 import MyPg from './icons/MyPg';
+import EditPencil from './icons/EditPencil';
+import KebabMenu from './icons/KebabMenu';
 
 // Icon paths
 export const icons = {
@@ -39,4 +41,6 @@ export const icons = {
   Chevron: <Chevron />,
   Trash: <Trash />,
   MyPg: <MyPg />,
+  EditPencil: <EditPencil />,
+  KebabMenu: <KebabMenu />,
 } as const;

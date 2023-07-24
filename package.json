@@ -1,6 +1,6 @@
 {
   "name": "@team-return/design-system",
-  "version": "1.0.74",
+  "version": "1.0.81",
   "repository": {
     "type": "git",
     "url": "https://github.com/Team-Return/JOBIS-DESIGN-SYSTEM.git"
@@ -22,6 +22,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "uuid": "^9.0.0",
     "zustand": "^4.3.7"
   },
   "scripts": {
@@ -55,16 +56,19 @@
     "@storybook/addon-links": "^6.5.15",
     "@storybook/builder-webpack4": "^6.5.15",
     "@storybook/builder-webpack5": "^6.5.15",
+    "@storybook/manager-api": "^7.1.0",
     "@storybook/manager-webpack4": "^6.5.15",
     "@storybook/manager-webpack5": "^6.5.15",
     "@storybook/mdx2-csf": "^0.0.4",
     "@storybook/react": "^6.5.15",
     "@storybook/testing-library": "^0.0.13",
+    "@storybook/theming": "^7.1.0",
     "@types/jest": "^29.2.6",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/styled-components": "^5.1.26",
+    "@types/uuid": "^9.0.2",
     "babel-loader": "^9.1.2",
     "babel-plugin-named-asset-import": "^0.3.8",
     "babel-preset-react-app": "^10.0.1",

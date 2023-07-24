@@ -23,7 +23,7 @@ module.exports = {
         test: /\.(jpeg|jpg|png|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
+          name: 'styles/[name].[ext]',
           outputPath: 'styles/icons', // 이미지가 저장될 출력 디렉토리
           publicPath: 'styles/icons',
         },
@@ -31,7 +31,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.png'],
   },
   plugins: [new CleanWebpackPlugin()],
 };
