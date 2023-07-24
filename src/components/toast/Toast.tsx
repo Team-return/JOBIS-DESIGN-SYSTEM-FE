@@ -8,8 +8,8 @@ import { useToastStore } from '../../context/ToastContext';
 export type ColorType = 'GREEN' | 'RED' | 'YELLOW' | 'BLUE';
 
 export interface ToastProps {
-  id?: number;
-  type?: ColorType;
+  id: string;
+  type: ColorType;
   title?: string;
   message: string;
 }
@@ -20,54 +20,40 @@ export const Toast = ({
   title,
   message = 'Message',
 }: ToastProps) => {
-  const [num, setNum] = useState<number>(5);
   const [isOut, setIsOut] = useState(false);
-  const progress = Math.floor((num / 5) * 100);
-  useEffect(() => {
-    setTimeout(() => {
-      setNum((prev) => prev - 0.1);
-    }, 100);
-  }, [num]);
+  const { delete: del, list } = useToastStore();
 
   useEffect(() => {
     setTimeout(() => {
       setIsOut(true);
-    }, 5000);
+    }, 4500);
     setTimeout(() => {
-      deleteToast();
+      del(id);
     }, 5000);
   }, []);
 
-  const [list, del] = useToastStore((state) => [state.list, state.delete]);
-
-  const deleteToast = async () => {
-    setIsOut(true);
-    setTimeout(() => {
-      del({
-        id,
-        type: type as ColorType,
-        message,
-      });
-    }, 500);
+  const deleteToast = async (id: string) => {
+    del(id);
   };
 
   return (
-    <_Wrapper isOut={isOut} type={type} message="">
+    <_Wrapper id={id} isOut={isOut} type={type} message="">
       <div style={{ padding: 17 }}>
         <Icon icon={IconName(type)} size={38} color="gray10" />
       </div>
       <div>
         <Text color="gray10" size="Heading6">
           {title}
+          {id}
         </Text>
         <Text color="gray10" size="Body2">
           {message}
         </Text>
       </div>
-      <Delete onClick={deleteToast}>
+      <Delete onClick={() => deleteToast(id)}>
         <Icon cursor="pointer" icon="Close" size={24} color="gray10" />
       </Delete>
-      <Progress progress={progress}></Progress>
+      <Progress />
     </_Wrapper>
   );
 };
@@ -81,7 +67,7 @@ const _Wrapper = styled.div<ToastProps & { isOut: boolean }>`
   margin-bottom: 20px;
   border-radius: 3px;
   z-index: 200;
-  background-color: ${({ type }) => BackGroundColor(type ?? 'GREEN')};
+  background-color: ${({ type }) => BackGroundColor(type)};
   opacity: 0.8;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
   opacity: 0.8;
@@ -111,14 +97,21 @@ const Delete = styled.div`
   right: 12px;
 `;
 
-const Progress = styled.div<{ progress?: number }>`
+const Progress = styled.div`
   position: absolute;
   bottom: 0;
-  width: ${(props) => props.progress + '%'};
   height: 5px;
   background-color: #000000;
   opacity: 0.2;
-  transition: 0.2s;
+  animation: progressBar 5s linear;
+  @keyframes progressBar {
+    0% {
+      width: 100%;
+    }
+    100% {
+      width: 0%;
+    }
+  }
 `;
 
 const BackGroundColor = (type: ColorType) => {

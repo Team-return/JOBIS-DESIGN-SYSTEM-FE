@@ -1,8 +1,10 @@
+import { randomUUID } from 'crypto';
 import { ColorType } from '../components/toast/Toast';
 import { create } from 'zustand';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface ToastState {
-  id?: number;
+  id: string;
   title?: string;
   type: ColorType;
   message: string;
@@ -11,8 +13,8 @@ export interface ToastState {
 
 interface BearState {
   list: ToastState[];
-  append: (by: ToastState) => void;
-  delete: (by: ToastState) => void;
+  append: (by: Omit<ToastState, 'id'>) => void;
+  delete: (id: string) => void;
 }
 
 export const useToastStore = create<BearState>()((set) => ({
@@ -20,70 +22,20 @@ export const useToastStore = create<BearState>()((set) => ({
   append: (by) =>
     set((state) => ({
       list: state.list.concat({
-        id: state.list.length + 1,
+        id: uuidv4(),
         title: by.title,
         message: by.message,
         type: by.type,
       }),
     })),
-  delete: (by) =>
+  delete: (deleteId) =>
     set((state) => ({
-      list: state.list.filter((res) => res.id !== by.id),
+      list: state.list.map(({ id, title, type, message }) => {
+        if (deleteId === id) {
+          return { id: '', title: '', type: 'GREEN', message: '' };
+        } else {
+          return { id, title: title, type: type, message: message };
+        }
+      }),
     })),
 }));
-
-// interface ToastList {
-//   lists: ToastState[];
-// }
-
-// type ToastAction = {
-//   actionType: 'APPEND_TOAST' | 'DELETE_TOAST';
-//   id?: number;
-//   toastType: ColorType;
-//   message: string;
-//   title?: string;
-//   time?: number;
-// };
-
-// const toastDefaultValue: ToastList = {
-//   lists: [],
-// };
-
-// export const toastStateContext = createContext(toastDefaultValue);
-
-// type ToastDispatch = Dispatch<ToastAction>;
-
-// export const toastDispatchContext = createContext<ToastDispatch>(() => null);
-
-// const toastReducer = (state: ToastList, action: ToastAction): ToastList => {
-//   switch (action.actionType) {
-//     case 'APPEND_TOAST':
-//       return {
-//         lists: state.lists.concat({
-//           id: state.lists.length + 1,
-//           title: action.title,
-//           message: action.message,
-//           type: action.toastType,
-//         }),
-//       };
-//     case 'DELETE_TOAST':
-//       return {
-//         lists: state.lists.filter((res) => res.id !== action.id),
-//       };
-//     default:
-//       return state;
-//   }
-// };
-
-// export const ToastProvider: FunctionComponent<{
-//   children: ReactNode;
-// }> = ({ children }) => {
-//   const [toast, toastDispatch] = useReducer(toastReducer, toastDefaultValue);
-//   return (
-//     <toastStateContext.Provider value={toast}>
-//       <toastDispatchContext.Provider value={toastDispatch}>
-//         {children}
-//       </toastDispatchContext.Provider>
-//     </toastStateContext.Provider>
-//   );
-// };

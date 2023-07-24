@@ -17,39 +17,23 @@ const Template: ComponentStory<typeof ToastContainer> = (args) => (
 );
 
 const Test = () => {
-  const [list, append] = useToastStore((state) => [state.list, state.append]);
-  useEffect(() => {
-    append({
-      type: 'YELLOW',
-      message: '정보',
-      title: '안녕하세요',
-    });
-    setTimeout(
-      () =>
-        append({
-          type: 'GREEN',
-          message: '성공',
-        }),
-      1000
-    );
-    setTimeout(
-      () =>
-        append({
-          type: 'RED',
-          message: '에러',
-        }),
-      2000
-    );
-    setTimeout(
-      () =>
-        append({
-          type: 'RED',
-          message: '에러',
-        }),
-      8000
-    );
-  }, []);
-  return <div></div>;
+  const { append } = useToastStore();
+
+  return (
+    <div>
+      <button
+        onClick={() => {
+          append({
+            type: 'YELLOW',
+            message: '정보',
+            title: '안녕하세요',
+          });
+        }}
+      >
+        정지관
+      </button>
+    </div>
+  );
 };
 
 export const Default = Template.bind({});

@@ -9,7 +9,9 @@ export const ToastContainer = () => {
     <_Container>
       {toastState.map((list) => {
         const { title, id, type, message } = list;
-        return <Toast id={id} type={type} title={title} message={message} />;
+        return (
+          id && <Toast id={id} type={type} title={title} message={message} />
+        );
       })}
     </_Container>
   );
