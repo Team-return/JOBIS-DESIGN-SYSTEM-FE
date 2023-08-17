@@ -21,7 +21,7 @@ export const Toast = ({
   message = 'Message',
 }: ToastProps) => {
   const [isOut, setIsOut] = useState(false);
-  const { delete: del, list } = useToastStore();
+  const { delete: del } = useToastStore();
 
   useEffect(() => {
     setTimeout(() => {
@@ -44,7 +44,6 @@ export const Toast = ({
       <div>
         <Text color="gray10" size="Heading6">
           {title}
-          {id}
         </Text>
         <Text color="gray10" size="Body2">
           {message}

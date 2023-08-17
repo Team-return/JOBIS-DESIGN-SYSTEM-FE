@@ -10,6 +10,7 @@ interface RadioButtonProps extends marginCssType {
   disabled?: boolean;
   onClick?: () => void;
   value?: string;
+  checked?: boolean;
   name?: string;
 }
 
@@ -20,6 +21,7 @@ export const RadioButton = ({
   margin,
   children,
   name,
+  checked,
   value,
 }: RadioButtonProps) => {
   return (
@@ -31,6 +33,7 @@ export const RadioButton = ({
         type="radio"
         value={value}
         disabled={disabled}
+        checked={checked}
         name={name}
       />
       {children}

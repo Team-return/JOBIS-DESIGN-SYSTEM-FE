@@ -19,6 +19,8 @@ import Trash from './icons/Trash';
 import MyPg from './icons/MyPg';
 import EditPencil from './icons/EditPencil';
 import KebabMenu from './icons/KebabMenu';
+import BookmarkOn from './icons/BookmarkOn';
+import BookmarkOff from './icons/BookmarkOff';
 
 // Icon paths
 export const icons = {
@@ -43,4 +45,6 @@ export const icons = {
   MyPg: <MyPg />,
   EditPencil: <EditPencil />,
   KebabMenu: <KebabMenu />,
+  BookmarkOff: <BookmarkOff />,
+  BookmarkOn: <BookmarkOn />,
 } as const;
