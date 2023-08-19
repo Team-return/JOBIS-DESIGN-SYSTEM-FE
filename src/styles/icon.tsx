@@ -21,6 +21,7 @@ import EditPencil from './icons/EditPencil';
 import KebabMenu from './icons/KebabMenu';
 import BookmarkOn from './icons/BookmarkOn';
 import BookmarkOff from './icons/BookmarkOff';
+import { Document } from './icons/Document';
 
 // Icon paths
 export const icons = {
@@ -47,4 +48,5 @@ export const icons = {
   KebabMenu: <KebabMenu />,
   BookmarkOff: <BookmarkOff />,
   BookmarkOn: <BookmarkOn />,
+  Document: <Document />,
 } as const;
