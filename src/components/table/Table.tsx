@@ -111,7 +111,6 @@ const TBody = styled.div`
 const BodyCell = styled.div<{ width?: number }>`
   display: flex;
   justify-content: center;
-  align-items: center;
   border: 1px solid ${C.gray40};
   ${F.font.Heading5};
   width: ${({ width }) => width + '%'};
