@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import { ReactNode } from 'react';
 import { colorKeyOfType } from '../../styles/theme/color';
 import { fontKeyOfType } from '../../styles/theme/font';
@@ -9,13 +9,13 @@ interface TextProps extends marginCssType {
   className?: string;
   children?: ReactNode;
   color?: colorKeyOfType;
-  display?: 'inline' | 'inline-block' | 'block';
+  display?: CSSProperties['display'];
   size?: fontKeyOfType;
   onClick?: () => void;
-  cursor?: 'pointer' | 'auto' | 'default';
-  align?: 'center' | 'start' | 'end';
+  cursor?: CSSProperties['cursor'];
+  align?: CSSProperties['alignItems'];
   width?: number;
-  whiteSpace?: 'nowrap' | 'pre-line' | 'pre-wrap' | 'normal';
+  whiteSpace?: CSSProperties['whiteSpace'];
 }
 
 export const Text = ({
