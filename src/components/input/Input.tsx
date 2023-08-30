@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { marginCssType, marginToCss } from '../../utils/distance';
 import * as C from '../../styles/theme/color';
@@ -9,43 +9,33 @@ import { Icon, IconType } from '../icon/Icon';
 
 type kindType = 'LineInput' | 'DefaultInput';
 
-export interface InputProps extends marginCssType {
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+export interface InputProps
+  extends marginCssType,
+    InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   width?: number;
-  className?: string;
-  placeHolder?: string;
-  kind?: kindType;
   disabled?: boolean;
-  value?: string | number;
+  kind?: kindType;
   iconName?: IconType;
   iconClick?: () => void;
-  onClick?: () => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   message?: string;
   error?: boolean;
-  type?: 'text' | 'password' | 'number';
-  name?: string;
 }
 
 export const Input = ({
   onChange,
   label,
   width = 30,
-  className,
-  placeHolder = 'Placeholder',
   kind = 'DefaultInput',
-  disabled = false,
-  value = '',
   iconName,
-  onClick,
   iconClick,
+  disabled = false,
   margin,
   message,
   error = false,
-  type,
-  name,
   onKeyDown,
+  ...props
 }: InputProps) => {
   return (
     <_Wrapper width={width} margin={margin}>
@@ -56,17 +46,10 @@ export const Input = ({
       )}
       <_Container>
         <_BaseInput
+          {...props}
           onKeyDown={onKeyDown}
-          type={type}
-          onChange={onChange}
-          className={className}
-          value={value}
-          disabled={disabled}
-          placeholder={placeHolder}
           kind={kind}
           error={error}
-          name={name}
-          onClick={onClick}
         />
         <_Icon>
           {iconName && (
