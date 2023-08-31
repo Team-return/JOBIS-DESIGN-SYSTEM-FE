@@ -24,7 +24,6 @@ export interface InputProps
 }
 
 export const Input = ({
-  onChange,
   label,
   width = 30,
   kind = 'DefaultInput',
@@ -48,6 +47,7 @@ export const Input = ({
         <_BaseInput
           {...props}
           onKeyDown={onKeyDown}
+          disabled={disabled}
           kind={kind}
           error={error}
         />
