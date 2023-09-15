@@ -114,4 +114,5 @@ const BodyCell = styled.div<{ width?: number }>`
   border: 1px solid ${C.gray40};
   ${F.font.Heading5};
   width: ${({ width }) => width + '%'};
+  line-height: 20px;
 `;
