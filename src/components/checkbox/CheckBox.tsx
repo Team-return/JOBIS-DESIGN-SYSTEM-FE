@@ -13,7 +13,7 @@ interface CheckBoxProps
 
 export const CheckBox = ({
   className,
-  disabled = true,
+  disabled = false,
   margin,
   children,
   ...props
@@ -45,7 +45,8 @@ const _Wrapper = styled.input<CheckBoxProps>`
   width: 18px;
   height: 18px;
   accent-color: #0087ff;
-  border: 1px solid ${theme.color.gray50};
+  border: 1px solid
+    ${({ disabled }) => (disabled ? theme.color.gray40 : theme.color.gray50)};
   border-radius: 4px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   &:checked {
