@@ -14,7 +14,7 @@ export const color = {
   error: '#e74c3c',
   success: '#2ecc71',
   warning: '#f1c40f',
-  skyblue: '#2492F4',
+  skyblue: '#237BC9',
 } as const;
 
 export const {

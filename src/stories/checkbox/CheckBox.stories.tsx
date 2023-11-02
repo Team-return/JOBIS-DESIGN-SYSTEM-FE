@@ -14,6 +14,7 @@ const Template: ComponentStory<typeof CheckBox> = (args) => (
 
 export const Off = Template.bind({});
 Off.args = {
+  disabled: false,
   checked: false,
   children: '체크 박스',
 };
