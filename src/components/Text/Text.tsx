@@ -15,7 +15,7 @@ interface TextProps extends marginCssType {
   cursor?: CSSProperties['cursor'];
   align?: CSSProperties['alignItems'];
   width?: number;
-  whiteSpace?: CSSProperties['whiteSpace'];
+  whitespace?: CSSProperties['whiteSpace'];
 }
 
 export const Text = ({
@@ -29,7 +29,7 @@ export const Text = ({
   align,
   margin,
   width,
-  whiteSpace = 'pre-line',
+  whitespace = 'pre-line',
 }: TextProps) => {
   return (
     <Wrapper
@@ -41,7 +41,7 @@ export const Text = ({
       onClick={onClick}
       size={size}
       margin={margin}
-      whiteSpace={whiteSpace}
+      whitespace={whitespace}
       width={width}
     >
       {children}
@@ -56,5 +56,5 @@ const Wrapper = styled.div<TextProps>`
   ${({ margin }) => marginToCss({ margin })};
   text-align: ${({ align }) => align};
   cursor: ${({ cursor }) => cursor};
-  white-space: ${({ whiteSpace }) => whiteSpace};
+  white-space: ${({ whitespace }) => whitespace};
 `;
