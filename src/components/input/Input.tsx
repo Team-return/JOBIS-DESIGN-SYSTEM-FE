@@ -50,16 +50,17 @@ export const Input = ({
           disabled={disabled}
           kind={kind}
           error={error}
+          max="9999-12-31"
         />
-        <_Icon>
-          {iconName && (
+        {iconName && (
+          <_Icon>
             <Icon
               onClick={iconClick}
               icon={iconName}
               color={IconColor(disabled, error)}
             />
-          )}
-        </_Icon>
+          </_Icon>
+        )}
       </_Container>
       {!disabled && message && <_Message error={error}>{message}</_Message>}
     </_Wrapper>
